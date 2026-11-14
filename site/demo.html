@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Check an Item · Which Bin</title>
-<meta name="description" content="Type an item or snap a photo, pick your city, and get the bin with the city's own rule quoted.">
+<meta name="description" content="Type an item or snap a photo, pick up to three cities, and get each city's bin with its own rule quoted.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
@@ -16,25 +16,26 @@
  <div class="wrap">
   <span class="eyebrow rv">Checker</span>
   <h1 class="rv" style="--d:.06s">Where does it go?</h1>
-  <p class="sub rv" style="--d:.12s">Answers come only from your city's official pages, with the exact sentence they rely on.</p>
+  <p class="sub rv" style="--d:.12s">Answers come only from each city's official pages, with the exact sentence they rely on. Compare up to three cities at once.</p>
  </div>
 </div>
 <section style="padding-top:8px">
  <div class="wrap">
-  <form class="tool rv" id="f" style="--d:.18s">
-   <div class="row2">
-    <div class="field"><label for="item">Item</label><input class="input" id="item" name="item" required maxlength="100" autocomplete="off" placeholder="e.g. disposable vape"></div>
-    <div class="field"><label for="city">City</label><select class="input" id="city" name="city" required><option value="">Loading cities…</option></select></div>
-   </div>
+  <form class="tool rv" id="f" style="--d:.18s;max-width:960px" novalidate>
+   <div class="field"><label for="item">What are you throwing away?</label>
+    <input class="input" id="item" name="item" required maxlength="100" autocomplete="off" list="items" placeholder="e.g. disposable vape" enterkeyhint="search">
+    <datalist id="items"></datalist></div>
+   <div class="field"><label id="citylabel">City</label>
+    <div class="citylist" id="cities" aria-labelledby="citylabel"></div>
+    <button type="button" class="addcity" id="add">+ Compare with another city</button></div>
    <div class="chips" aria-label="Try an example">
+    <button type="button" class="chip" data-i="greasy pizza box" data-c="nyc,saint_paul,philadelphia">Pizza box in 3 cities</button>
+    <button type="button" class="chip" data-i="plastic shopping bag" data-c="berlin,nyc,toronto">Plastic bag in 3 cities</button>
     <button type="button" class="chip" data-i="disposable vape" data-c="camden">Vape · Camden</button>
-    <button type="button" class="chip" data-i="greasy pizza box" data-c="nyc">Pizza box · New York</button>
-    <button type="button" class="chip" data-i="LED light bulb" data-c="berlin">LED bulb · Berlin</button>
-    <button type="button" class="chip" data-i="plastic shopping bag" data-c="toronto">Plastic bag · Toronto</button>
-    <button type="button" class="chip" data-i="juice carton" data-c="shibuya">Carton · Shibuya</button>
+    <button type="button" class="chip" data-i="LED light bulb" data-c="nyc,berlin">LED bulb: New York vs Berlin</button>
    </div>
    <label class="drop" id="drop"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span id="droptext">Or take or drop a photo of the item</span><input type="file" id="photo" accept="image/*" capture="environment"></label>
-   <div class="actions"><button class="btn" id="go">Check <i aria-hidden="true"></i></button><span style="font-size:12.5px;color:var(--muted)">Free public demo, limited to a few checks per minute.</span></div>
+   <div class="actions"><button class="btn" id="go">Check <i aria-hidden="true"></i></button><button type="button" class="btn ghost" id="share" hidden>Copy link</button><span style="font-size:12.5px;color:var(--muted)">Free public demo with a shared quota. Repeat questions are instant.</span></div>
    <div class="out" id="out" aria-live="polite"></div>
    <div class="history" id="hist" hidden><h4>Recent checks</h4><div id="histlist"></div></div>
   </form>
@@ -42,52 +43,66 @@
 </section>
 <section style="padding-top:0">
  <div class="wrap grid3" style="margin-top:0">
-  <div class="card rv"><h3>Only the city's words</h3><p>The model reads your city's saved official pages and nothing else.</p></div>
-  <div class="card rv" style="--d:.1s"><h3>Quotes are checked</h3><p>A quote appears only if it matches the page word for word. Otherwise you see "best guess".</p></div>
-  <div class="card rv" style="--d:.2s"><h3>Silence is reported</h3><p>If the page doesn't cover your item, you're told to check with the city.</p></div>
+  <div class="card rv"><h3>Only the city's words</h3><p>The model reads each city's saved official pages and nothing else.</p></div>
+  <div class="card rv" style="--d:.1s"><h3>Quotes are checked</h3><p>A quote appears only if it matches the page word for word. Open "Show it on the page" to see it in place.</p></div>
+  <div class="card rv" style="--d:.2s"><h3>Silence is reported</h3><p>If a page doesn't cover your item, you're told to check with the city, not given a guess.</p></div>
  </div>
 </section>
+<div class="toast" id="toast" role="status"></div>
 <footer></footer>
 <script src="/main.js"></script>
 <script>
 const $ = id => document.getElementById(id);
-const GLYPH = { recycle: ["♻", "#cfe2f3"], organics: ["🌱", "#d7ebc9"], trash: ["🗑", "#ebe5dc"], special: ["⚠", "#211c15"] };
-let names = {};
+let names = {}, options = "";
+const toast = t => { $("toast").textContent = t; $("toast").classList.add("on"); setTimeout(() => $("toast").classList.remove("on"), 1800); };
+
+function addCity(value = "") {
+  const rows = $("cities").children;
+  if (rows.length >= 3) return;
+  const row = document.createElement("div");
+  row.className = "cityrow";
+  row.innerHTML = `<select class="input" aria-label="City ${rows.length + 1}">${options}</select>` + (rows.length ? '<button type="button" class="x" aria-label="Remove city">×</button>' : "");
+  row.querySelector("select").value = value;
+  row.querySelector(".x")?.addEventListener("click", () => { row.remove(); syncAdd(); });
+  $("cities").append(row); syncAdd();
+  return row.querySelector("select");
+}
+const syncAdd = () => $("add").hidden = $("cities").children.length >= 3;
+const chosen = () => [...new Set([...$("cities").querySelectorAll("select")].map(s => s.value).filter(Boolean))];
+function setCities(list) { $("cities").innerHTML = ""; (list.length ? list : [""]).slice(0, 3).forEach(addCity); }
+$("add").onclick = () => addCity().focus();
+
 fetch("/api/cities").then(r => r.json()).then(d => {
   const live = d.cities.filter(c => c.live && c.rules.length);
   names = Object.fromEntries(live.map(c => [c.id, c.name]));
   const groups = {};
   live.forEach(c => (groups[c.country] ||= []).push(c));
-  $("city").innerHTML = '<option value="">Choose a city</option>' + Object.keys(groups).sort().map(g =>
+  options = '<option value="">Choose a city</option>' + Object.keys(groups).sort().map(g =>
     `<optgroup label="${esc(g)}">${groups[g].map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join("")}</optgroup>`).join("");
+  $("items").innerHTML = Object.values(d.items).map(i => `<option value="${esc(i.name)}">`).join("");
   const q = new URLSearchParams(location.search);
-  if (q.get("city")) $("city").value = q.get("city");
-  if (q.get("item")) { $("item").value = q.get("item"); if ($("city").value) check(); }
+  setCities((q.get("city") || "").split(",").filter(c => names[c]));
+  if (q.get("item")) { $("item").value = q.get("item"); if (chosen().length) check(); }
 });
-document.querySelectorAll(".chip").forEach(b => b.onclick = () => { $("item").value = b.dataset.i; $("city").value = b.dataset.c; check(); });
+document.querySelectorAll(".chip").forEach(b => b.onclick = () => { $("item").value = b.dataset.i; setCities(b.dataset.c.split(",")); check(); });
 
 async function check() {
-  const item = $("item").value.trim(), city = $("city").value;
-  if (!item || !city) { (!item ? $("item") : $("city")).focus(); return; }
-  history.replaceState(null, "", `?item=${encodeURIComponent(item)}&city=${city}`);
-  $("go").disabled = true;
-  $("out").innerHTML = '<div class="skel" aria-label="Checking"></div>';
-  let r, a;
-  try { r = await fetch(`/api/which-bin?item=${encodeURIComponent(item)}&city=${city}`); a = await r.json(); } catch { a = { error: "failed" }; }
-  $("go").disabled = false;
-  if (a.error) {
-    const msg = a.error === "busy" ? "Lots of people are checking right now. Try again in a minute." : a.error.startsWith("no official") ? "We don't have this city's official page yet." : "Something went wrong. Try again.";
-    $("out").innerHTML = `<div class="result"><h3>${msg}</h3></div>`; return;
-  }
-  if (!a.class) { $("out").innerHTML = `<div class="result"><h3>${esc(names[city])}'s pages don't say clearly</h3><p style="color:var(--ink2);margin:8px 0 0">Check with your city before throwing it away.</p></div>`; return; }
-  const [g, bg] = GLYPH[a.class];
-  $("out").innerHTML = `<div class="result"><div class="kind"><div class="glyph" style="background:${bg};color:${a.class === "special" ? "#f9d9b4" : "inherit"}" aria-hidden="true">${g}</div>
-   <div><div style="font-size:13px;color:var(--muted)">${esc(item)} · ${esc(names[city])}</div><h3>${esc(a.bin)}</h3></div></div>
-   ${a.verified ? `<blockquote>"${esc(a.quote)}"</blockquote><div class="meta">✓ Quote found word for word on <a href="${esc(a.source)}">${esc(new URL(a.source).hostname)}</a></div>`
-                : `<div class="meta warn">No exact rule found on the page. Treat this as a best guess and check with your city.</div>`}</div>`;
-  remember(item, city, a.class);
+  const item = $("item").value.trim(), cities = chosen();
+  if (!item) return $("item").focus();
+  if (!cities.length) return $("cities").querySelector("select").focus();
+  history.replaceState(null, "", `?item=${encodeURIComponent(item)}&city=${cities.join(",")}`);
+  $("go").disabled = true; $("share").hidden = true;
+  $("out").innerHTML = `<div class="cmp" style="--n:${cities.length}">${cities.map(() => '<div class="skel" aria-hidden="true"></div>').join("")}</div>`;
+  const res = await Promise.all(cities.map(c => askBin(item, c)));
+  $("go").disabled = false; $("share").hidden = false;
+  const classes = new Set(res.filter(a => a.class).map(a => a.class));
+  const verdict = cities.length > 1 && classes.size > 1 ? `<div class="verdict split">⚡ These cities disagree: ${classes.size} different answers for the same item.</div>`
+    : cities.length > 1 && classes.size === 1 && res.every(a => a.class) ? `<div class="verdict same">✓ All ${cities.length} cities agree on this one.</div>` : "";
+  $("out").innerHTML = verdict + `<div class="cmp" style="--n:${cities.length}">${res.map((a, k) => resultCard(a, item, names[cities[k]])).join("")}</div>`;
+  res.forEach((a, k) => a.class && remember(item, cities[k], a.class));
 }
 $("f").onsubmit = e => { e.preventDefault(); check(); };
+$("share").onclick = async () => { try { await navigator.clipboard.writeText(location.href); toast("Link copied"); } catch { toast("Copy the address bar to share"); } };
 
 // recent checks (this browser only)
 function remember(item, city, cls) {
@@ -100,7 +115,7 @@ function showHist(h) {
   if (!h.length) return;
   $("hist").hidden = false;
   $("histlist").innerHTML = h.map(x => `<button type="button" data-i="${esc(x.item)}" data-c="${x.city}"><span>${esc(x.item)} · ${esc(names[x.city] || x.city)}</span><span class="tag ${x.cls}">${TAG[x.cls]}</span></button>`).join("");
-  $("histlist").querySelectorAll("button").forEach(b => b.onclick = () => { $("item").value = b.dataset.i; $("city").value = b.dataset.c; check(); });
+  $("histlist").querySelectorAll("button").forEach(b => b.onclick = () => { $("item").value = b.dataset.i; setCities([b.dataset.c]); check(); });
 }
 try { setTimeout(() => showHist(JSON.parse(localStorage.getItem("wb-hist") || "[]")), 300); } catch {}
 
@@ -108,12 +123,12 @@ try { setTimeout(() => showHist(JSON.parse(localStorage.getItem("wb-hist") || "[
 async function usePhoto(file) {
   if (!file || !file.type.startsWith("image/")) return;
   $("droptext").textContent = "Looking at your photo…";
-  const img = await createImageBitmap(file), s = Math.min(1, 1024 / Math.max(img.width, img.height));
-  const cv = Object.assign(document.createElement("canvas"), { width: img.width * s, height: img.height * s });
-  cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
   try {
+    const img = await createImageBitmap(file), s = Math.min(1, 1024 / Math.max(img.width, img.height));
+    const cv = Object.assign(document.createElement("canvas"), { width: img.width * s, height: img.height * s });
+    cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
     const r = await fetch("/api/identify", { method: "POST", body: cv.toDataURL("image/jpeg", .85) }), a = await r.json();
-    if (a.item) { $("item").value = a.item; $("droptext").textContent = `Looks like: ${a.item}`; $("city").value ? check() : $("city").focus(); }
+    if (a.item) { $("item").value = a.item; $("droptext").textContent = `Looks like: ${a.item}`; chosen().length ? check() : $("cities").querySelector("select").focus(); }
     else $("droptext").textContent = a.error === "busy" ? "Busy right now. Try again in a minute." : "Couldn't tell what that is. Type it instead.";
   } catch { $("droptext").textContent = "Couldn't read the photo. Type the item instead."; }
 }

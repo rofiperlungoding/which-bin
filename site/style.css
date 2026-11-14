@@ -322,3 +322,27 @@ dialog[open]{animation:pop .35s var(--ease)}
  *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
  .rv{opacity:1;transform:none}
 }
+
+/* answer on the page */
+.onpage{border:0;padding:0;margin-top:10px}
+.onpage summary{padding:6px 0;font-size:13px;font-weight:500;color:var(--ink2);justify-content:flex-start;gap:8px}
+.onpage summary:after{width:22px;height:22px;font-size:14px}
+.pagesnip{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font:13px/1.65 Georgia,serif;color:#6f685d;margin-top:6px;animation:fade .35s var(--ease)}
+.pagesnip .src{font:11.5px ui-monospace,Consolas,monospace;color:var(--muted);margin-bottom:8px;word-break:break-all}
+.pagesnip mark{background:linear-gradient(transparent 15%,#ffd69a 15%);color:var(--ink);padding:0 2px;border-radius:2px;animation:hl 1.2s var(--ease) both}
+@keyframes hl{from{background-size:0 100%}to{background-size:100% 100%}}
+mark{background-repeat:no-repeat}
+.cmp{display:grid;grid-template-columns:repeat(var(--n,1),1fr);gap:14px}
+.cmp .result{height:100%}
+.verdict{display:flex;align-items:center;gap:10px;border-radius:14px;padding:12px 16px;margin-bottom:14px;font-size:14px;font-weight:500;animation:pop .5s var(--ease)}
+.verdict.split{background:var(--dark);color:#fff}.verdict.same{background:#e3f1dc;color:var(--ok)}
+.citylist{display:grid;gap:8px}
+.cityrow{display:flex;gap:8px}
+.cityrow select{flex:1}
+.x{border:1px solid var(--line);background:#fff;border-radius:12px;width:46px;cursor:pointer;font-size:18px;color:var(--ink2)}
+.x:hover{background:var(--peach2)}
+.addcity{font:inherit;font-size:13px;font-weight:500;background:none;border:0;color:var(--orange);cursor:pointer;padding:4px 0;justify-self:start}
+.addcity:hover{text-decoration:underline}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--dark);color:#fff;border-radius:999px;padding:10px 18px;font-size:13.5px;opacity:0;transition:opacity .3s,transform .3s var(--ease);z-index:99;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (max-width:860px){.cmp{grid-template-columns:1fr}}

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Judge Tour · Which Bin</title>
+<meta name="description" content="A two-minute guided tour of Which Bin: the problem, how we measure it, a live demo and how it plugs in.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♻</text></svg>">
+<style>
+body>.wrap,main.wrap{width:100%}
+body>.wrap,main.wrap{width:100%}
+body{min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(1200px 600px at 50% 120%,var(--peach),var(--bg) 65%)}
+.tbar{display:flex;align-items:center;gap:20px;padding:16px 0}
+.prog{flex:1;display:flex;gap:6px}
+.prog button{flex:1;height:6px;border:0;border-radius:999px;background:#eadfce;cursor:pointer;padding:0;position:relative;overflow:hidden}
+.prog button i{position:absolute;inset:0;background:var(--dark);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.prog button.done i{transform:none}
+.count{font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.skip{font-size:13px;color:var(--ink2);white-space:nowrap}
+main{flex:1;display:grid;position:relative}
+.slide{grid-area:1/1;display:flex;flex-direction:column;justify-content:center;padding:24px 0 40px;opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .5s var(--ease),transform .6s var(--ease),visibility 0s .6s}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .5s var(--ease) .1s,transform .6s var(--ease) .1s}
+.slide.left{transform:translateX(-40px)}
+.slide h1{font-size:clamp(32px,5vw,58px);text-align:center}
+.slide .sub{font-size:17px;max-width:640px}
+.rub{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.rub span{font-size:11.5px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;border:1px solid #e8cfae;background:#fff8ef;color:#a2561a;border-radius:999px;padding:3px 10px}
+.trio3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:36px auto 0;width:100%}
+.flip{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;text-align:left;opacity:0;transform:translateY(16px) rotateX(-20deg);transition:opacity .5s var(--ease),transform .6s var(--ease);box-shadow:0 18px 40px #c9874a1f}
+.flip.in{opacity:1;transform:none}
+.flip .c{font-size:13px;color:var(--muted)}
+.flip .b{font-size:24px;font-weight:500;margin:8px 0 10px}
+.flip q{display:block;font-size:13.5px;color:var(--ink2)}
+.bignum{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:40px auto 0;width:100%}
+.bignum div{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;text-align:left}
+.bignum strong{display:block;font-size:clamp(44px,6vw,72px);font-weight:500;letter-spacing:-.04em;line-height:1}
+.bignum p{color:var(--ink2);margin:10px 0 0;font-size:14.5px}
+.picker{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:28px 0 20px}
+.picker .chip{font-size:14px;padding:8px 16px}
+.picker .chip[aria-pressed=true]{background:var(--dark);color:#fff;border-color:var(--dark)}
+.live{max-width:1000px;margin:0 auto;width:100%}
+.say{max-width:640px;margin:22px auto 0;text-align:center;color:var(--ink2);font-size:15px;min-height:24px}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:0 0 28px}
+.nav .btn[disabled]{opacity:.3;pointer-events:none}
+.kbd{font-size:12px;color:var(--muted)}
+.kbd kbd{font:11px ui-monospace,Consolas,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;background:#fff}
+.uses{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:36px auto 0;width:100%}
+.uses .card{text-decoration:none}
+.uses pre{background:#f6f1e9;border-radius:10px;padding:10px;font-size:11.5px;white-space:pre-wrap;word-break:break-all;margin:6px 0 0}
+.facts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.facts span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--ink2)}
+@media (max-width:860px){.trio3,.bignum,.uses{grid-template-columns:1fr}.kbd{display:none}.slide{justify-content:flex-start;padding-top:12px}}
+</style>
+</head>
+<body>
+<div class="wrap tbar">
+ <a class="logo" href="/"><b aria-hidden="true">♻</b><span>Which Bin</span></a>
+ <div class="prog" id="prog" role="tablist" aria-label="Tour progress"></div>
+ <span class="count" id="count">1 / 7</span>
+ <a class="skip" href="/demo">Skip to checker →</a>
+</div>
+
+<main class="wrap" id="slides">
+ <section class="slide" aria-label="The question">
+  <div class="rub"><span>The problem</span></div>
+  <h1>Where does a greasy pizza box go?</h1>
+  <p class="sub">Ask three cities. Each answer comes from that city's official page.</p>
+  <div class="cta" style="margin-top:28px"><button class="btn" id="ask3">Ask three cities <i aria-hidden="true"></i></button></div>
+  <div class="trio3" id="three"></div>
+  <p class="say" id="say1"></p>
+ </section>
+
+ <section class="slide" aria-label="How big the problem is">
+  <div class="rub"><span>Impact</span><span>How we measure it</span></div>
+  <h1>This is the rule, not the exception</h1>
+  <p class="sub">We collected <b id="t-rules">300</b> official rules for 20 everyday items across <b id="t-cities">25</b> cities in <b id="t-countries">7</b> countries.</p>
+  <div class="bignum">
+   <div><strong><span id="t-dis">17</span>/20</strong><p>items get different answers in different cities</p></div>
+   <div><strong id="t-ceil">78%</strong><p>is the best any location-blind answer can score. That's the ceiling for generic advice.</p></div>
+   <div><strong id="t-unsafe">23%</strong><p>of drop-off-only items, like batteries and vapes, end up in a normal bin under generic advice. That's a fire risk.</p></div>
+  </div>
+ </section>
+
+ <section class="slide" aria-label="The model audit">
+  <div class="rub"><span>Impact</span><span>Technical</span></div>
+  <h1>Knowing the city name isn't enough</h1>
+  <p class="sub">We scored four Gemini models on 94 hand-checked rules. Without a location, none gets past the dashed line. Reading the city's own page does best.</p>
+  <div class="chart" style="width:100%;margin-top:32px"><div id="bars"></div><p class="axisnote" id="ceilnote"></p></div>
+ </section>
+
+ <section class="slide" aria-label="Live demo">
+  <div class="rub"><span>Technical</span><span>Live</span></div>
+  <h1>Your turn. Pick an item.</h1>
+  <p class="sub">Three cities at once, answered from their own pages.</p>
+  <div class="picker" id="picker">
+   <button class="chip" data-i="plastic shopping bag" data-c="berlin,nyc,toronto">Plastic bag</button>
+   <button class="chip" data-i="styrofoam takeaway box" data-c="toronto,camden,nyc">Styrofoam box</button>
+   <button class="chip" data-i="LED light bulb" data-c="nyc,berlin,toronto">LED bulb</button>
+   <button class="chip" data-i="juice carton" data-c="shibuya,berlin,nyc">Juice carton</button>
+  </div>
+  <div class="live" id="live"></div>
+ </section>
+
+ <section class="slide" aria-label="Every answer is checked">
+  <div class="rub"><span>Technical</span><span>Trust</span></div>
+  <h1>Every answer shows its proof</h1>
+  <p class="sub">The model must quote the page. We search for the quote on the page itself. No exact match, no rule shown.</p>
+  <div class="live" style="max-width:640px;margin-top:28px" id="proof"></div>
+ </section>
+
+ <section class="slide" aria-label="Guidance gaps">
+  <div class="rub"><span>Impact</span><span>For cities</span></div>
+  <h1>Cities learn where their guide is silent</h1>
+  <p class="sub">Reading every page for the same 20 items shows what residents can't find, so cities know what to add.</p>
+  <div class="split" style="max-width:900px;margin:36px auto 0;width:100%">
+   <div><div class="big"><span id="g-vape">7</span><small> / <span id="g-n">15</span></small></div><p style="color:var(--ink2)">resident guides never mention vapes</p></div>
+   <div class="gapbars" id="gapbars"></div>
+  </div>
+ </section>
+
+ <section class="slide" aria-label="How it is used">
+  <div class="rub"><span>Feasibility</span><span>Open source</span></div>
+  <h1>Built to plug in today</h1>
+  <p class="sub">One rules layer, three ways in. Everything is open: data under CC BY 4.0, code under MIT.</p>
+  <div class="uses">
+   <a class="card" href="/demo"><h3>Residents</h3><p>Type or photograph an item. Compare cities.</p><span class="link" style="margin-top:auto">Open the checker</span></a>
+   <a class="card" href="/developers"><h3>AI assistants</h3><p>One MCP tool or HTTP call.</p><pre>claude mcp add which-bin -- python mcp_server.py</pre></a>
+   <a class="card" href="/cities#gaps"><h3>Cities</h3><p>A gap list for every resident guide we read.</p><span class="link" style="margin-top:auto">See the gaps</span></a>
+  </div>
+  <div class="facts"><span>Standard-library Python, no dependencies</span><span>This site runs on a repurposed Android device</span><span>Answers cached: repeat questions cost nothing</span></div>
+  <div class="cta" style="margin-top:28px"><a class="btn" href="https://github.com/rofiperlungoding/which-bin">View the code <i aria-hidden="true"></i></a><button class="btn ghost" id="restart">Start over</button></div>
+ </section>
+</main>
+
+<div class="wrap nav">
+ <button class="btn ghost" id="back">← Back</button>
+ <span class="kbd">Use <kbd>←</kbd> <kbd>→</kbd> to move</span>
+ <button class="btn" id="next">Next <i aria-hidden="true"></i></button>
+</div>
+
+<script src="/main.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const slides = [...document.querySelectorAll(".slide")], wait = ms => new Promise(r => setTimeout(r, ms));
+let at = -1, stats, cities;
+$("prog").innerHTML = slides.map((s, k) => `<button role="tab" aria-label="Step ${k + 1}: ${s.getAttribute("aria-label")}"><i></i></button>`).join("");
+const tabs = [...$("prog").children];
+tabs.forEach((t, k) => t.onclick = () => go(k));
+
+function go(n) {
+  n = Math.max(0, Math.min(slides.length - 1, n));
+  if (n === at) return;
+  slides.forEach((s, k) => { s.classList.toggle("on", k === n); s.classList.toggle("left", k < n); s.inert = k !== n; });
+  tabs.forEach((t, k) => { t.classList.toggle("done", k <= n); t.setAttribute("aria-selected", k === n); });
+  $("count").textContent = `${n + 1} / ${slides.length}`;
+  $("back").disabled = n === 0;
+  $("next").innerHTML = n === slides.length - 1 ? "Open the checker <i aria-hidden=\"true\"></i>" : "Next <i aria-hidden=\"true\"></i>";
+  at = n; history.replaceState(null, "", "#" + (n + 1));
+  enter[n]?.();
+}
+$("next").onclick = () => at === slides.length - 1 ? location.href = "/demo" : go(at + 1);
+$("back").onclick = () => go(at - 1);
+$("restart").onclick = () => go(0);
+addEventListener("keydown", e => {
+  if (e.target.closest("input,select,textarea")) return;
+  if (e.key === "ArrowRight" || e.key === "PageDown") go(at + 1);
+  if (e.key === "ArrowLeft" || e.key === "PageUp") go(at - 1);
+});
+let x0; addEventListener("touchstart", e => x0 = e.touches[0].clientX, { passive: true });
+addEventListener("touchend", e => { const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 60) go(at + (dx < 0 ? 1 : -1)); });
+
+const countTo = (el, to, suffix = "") => { const t0 = performance.now();
+  const f = t => { const p = Math.min(1, (t - t0) / 1200); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))) + suffix; if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); };
+const LABEL = { "gemini-3.5-flash-lite": "Gemini 3.5 Flash-Lite", "gemini-3.1-flash-lite-preview": "Gemini 3.1 Flash-Lite", "gemini-3-flash-preview": "Gemini 3 Flash", "gemini-3.6-flash": "Gemini 3.6 Flash" };
+const MODE = { blind: "item only", city: "item + city name" };
+
+const enter = [
+  () => {},
+  () => { if (!stats) return; countTo($("t-dis"), stats.items_disagree); countTo($("t-ceil"), Math.round(stats.blind_ceiling * 100), "%"); countTo($("t-unsafe"), Math.round(stats.blind_unsafe * 100), "%"); },
+  () => {
+    if (!stats) return;
+    const rows = stats.audit.filter(a => a.mode !== "page").sort((a, b) => a.accuracy - b.accuracy);
+    const us = stats.audit.find(a => a.mode === "page"), ceil = (stats.hand_blind_ceiling * 100).toFixed(1);
+    const bar = (n, s, v, cls = "") => `<div class="row"><div class="name">${n}<small>${s}</small></div><div class="track"><div class="fill ${cls}" data-w="${(v * 100).toFixed(1)}">${pct(v)}</div><div class="ceil" style="left:${ceil}%"></div></div></div>`;
+    $("bars").innerHTML = rows.map(a => bar(LABEL[a.model] || a.model, MODE[a.mode], a.accuracy)).join("") + bar("<b style='color:var(--ink)'>Which Bin</b>", "reads the city's official pages", us.accuracy, "us");
+    $("ceilnote").textContent = `Dashed line: ${ceil}%, the ceiling for any answer that ignores location`;
+    requestAnimationFrame(() => setTimeout(() => $("bars").querySelectorAll("[data-w]").forEach((b, k) => setTimeout(() => b.style.width = b.dataset.w + "%", k * 120)), 300));
+  },
+  () => { if (!$("live").innerHTML) $("picker").querySelector(".chip").click(); },
+  async () => {
+    if ($("proof").innerHTML) return;
+    $("proof").innerHTML = '<div class="skel"></div>';
+    const a = await askBin("disposable vape", "camden");
+    $("proof").innerHTML = resultCard(a, "disposable vape", "Camden");
+    await wait(700);
+    const d = $("proof").querySelector("details"); if (d) d.open = true;
+  },
+  () => {
+    if (!cities) return;
+    const scanned = cities.filter(c => c.silent), gap = i => scanned.filter(c => c.silent.includes(i)).length;
+    $("g-n").textContent = scanned.length; countTo($("g-vape"), gap("vape"));
+    $("gapbars").innerHTML = [["vape", "Vapes"], ["led_bulb", "LED bulbs"], ["charging_cable", "Charging cables"], ["aa_battery", "AA batteries"]]
+      .map(([i, n]) => `<div><span>${n}</span><span class="t"><i data-w="${(gap(i) / scanned.length * 100).toFixed(0)}"></i></span><span>${gap(i)}/${scanned.length}</span></div>`).join("");
+    setTimeout(() => $("gapbars").querySelectorAll("[data-w]").forEach((b, k) => setTimeout(() => b.style.width = b.dataset.w + "%", k * 120)), 200);
+  },
+  () => {},
+];
+
+// slide 1: three cities, three answers, from the dataset
+const PIZZA = [["nyc", "New York City"], ["saint_paul", "Saint Paul"], ["philadelphia", "Philadelphia"]];
+$("ask3").onclick = async () => {
+  $("ask3").disabled = true;
+  const by = Object.fromEntries((cities || []).map(c => [c.id, c]));
+  $("three").innerHTML = PIZZA.map(([id, n]) => {
+    const r = by[id]?.rules.find(x => x.item === "pizza_box_greasy");
+    return `<div class="flip"><div class="c">${n}</div><div class="b">${r ? TAG[r.class] : "…"}</div>${r ? `<q>${esc(r.quote)}</q>` : ""}</div>`;
+  }).join("");
+  for (const f of $("three").children) { await wait(350); f.classList.add("in"); }
+  await wait(500);
+  $("say1").textContent = "Three cities, three different bins. Each one is right for its own collection system.";
+};
+
+// slide 4: live comparison
+document.querySelectorAll("#picker .chip").forEach(b => b.onclick = async () => {
+  document.querySelectorAll("#picker .chip").forEach(x => x.setAttribute("aria-pressed", x === b));
+  const item = b.dataset.i, ids = b.dataset.c.split(","), by = Object.fromEntries((cities || []).map(c => [c.id, c.name]));
+  $("live").innerHTML = `<div class="cmp" style="--n:3">${ids.map(() => '<div class="skel"></div>').join("")}</div>`;
+  const res = await Promise.all(ids.map(c => askBin(item, c)));
+  const kinds = new Set(res.filter(a => a.class).map(a => a.class));
+  $("live").innerHTML = (kinds.size > 1 ? `<div class="verdict split">⚡ ${kinds.size} different answers for the same item</div>` : kinds.size === 1 ? '<div class="verdict same">✓ These three agree</div>' : "")
+    + `<div class="cmp" style="--n:3">${res.map((a, k) => resultCard(a, item, by[ids[k]] || ids[k])).join("")}</div>`;
+});
+
+Promise.all([fetch("/api/stats").then(r => r.json()), fetch("/api/cities").then(r => r.json())]).then(([s, d]) => {
+  stats = s; cities = d.cities;
+  $("t-rules").textContent = s.rules; $("t-cities").textContent = s.cities;
+  $("t-countries").textContent = new Set(d.cities.filter(c => c.rules.length).map(c => c.country)).size;
+  enter[at]?.();
+});
+go(Math.max(0, (parseInt(location.hash.slice(1)) || 1) - 1));
+</script>
+</body>
+</html>

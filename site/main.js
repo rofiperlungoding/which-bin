@@ -2,7 +2,7 @@
 window.esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 window.TAG = { recycle: "Recycling", organics: "Compost", trash: "Garbage", special: "Drop-off" };
 window.pct = v => (v * 100).toFixed(1) + "%";
-const NAV = [["/", "Home"], ["/demo", "Try it"], ["/audit", "Audit"], ["/cities", "Cities"], ["/developers", "Developers"], ["/about", "About"]];
+const NAV = [["/", "Home"], ["/tour", "Tour"], ["/demo", "Try it"], ["/audit", "Audit"], ["/cities", "Cities"], ["/developers", "Developers"], ["/about", "About"]];
 const REPO = "https://github.com/rofiperlungoding/which-bin";
 const here = location.pathname.replace(/\.html$/, "").replace(/\/$/, "") || "/";
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -78,3 +78,18 @@ document.querySelectorAll(".carousel").forEach(c => {
   new MutationObserver(build).observe(s, { childList: true }); build();
 });
 
+
+// one answer card, shared by the checker and the judge tour
+const GLYPH = { recycle: ["♻", "#cfe2f3", "inherit"], organics: ["🌱", "#d7ebc9", "inherit"], trash: ["🗑", "#ebe5dc", "inherit"], special: ["⚠", "#211c15", "#f9d9b4"] };
+window.resultCard = (a, item, city) => {
+  if (a.error) return `<div class="result"><h3>${a.error === "busy" ? "Lots of people are checking right now. Try again in a minute." : a.error.startsWith("no official") ? `We don't have ${esc(city)}'s official page yet.` : "Something went wrong. Try again."}</h3></div>`;
+  if (!a.class) return `<div class="result"><div style="font-size:13px;color:var(--muted)">${esc(item)} · ${esc(city)}</div><h3>${esc(city)}'s page doesn't say</h3><p style="color:var(--ink2);margin:8px 0 0;font-size:14px">Check with the city before throwing it away. We won't guess.</p></div>`;
+  const [g, bg, fg] = GLYPH[a.class], c = a.context;
+  return `<div class="result" data-class="${a.class}"><div class="kind"><div class="glyph" style="background:${bg};color:${fg}" aria-hidden="true">${g}</div>
+   <div><div style="font-size:13px;color:var(--muted)">${esc(item)} · ${esc(city)}</div><h3>${esc(a.bin)}</h3></div></div>
+   ${a.verified ? `<blockquote>"${esc(a.quote)}"</blockquote>
+     <div class="meta">✓ Found word for word on <a href="${esc(a.source)}" target="_blank" rel="noopener">${esc(new URL(a.source).hostname)}</a></div>
+     ${c ? `<details class="onpage"><summary>Show it on the page</summary><div class="pagesnip"><div class="src">${esc(a.source)}</div>…${esc(c.before)}<mark>${esc(c.match)}</mark>${esc(c.after)}…</div></details>` : ""}`
+   : `<div class="meta warn">No exact rule found on the page. Treat this as a best guess and check with the city.</div>`}</div>`;
+};
+window.askBin = (item, city) => fetch(`/api/which-bin?item=${encodeURIComponent(item)}&city=${city}`).then(r => r.json()).catch(() => ({ error: "failed" }));

@@ -56,7 +56,36 @@ def chat(content, max_tokens):
         return json.load(r)["choices"][0]["message"]["content"] or ""
 
 
+ANSWERS = Path(os.environ.get("ANSWER_CACHE", ROOT / "answers.json"))
+try:
+    _memo = json.loads(ANSWERS.read_text(encoding="utf-8"))
+except (OSError, ValueError):
+    _memo = {}
+
+
+def context(text, quote, pad=240):
+    """Where the quote sits on the page: (before, quote as printed, after). Whitespace and punctuation may differ."""
+    words = re.findall(r"\w+", quote)
+    m = words and re.search(r"\W+".join(map(re.escape, words)), text, re.I)
+    if not m:
+        return None
+    return {"before": text[max(0, m.start() - pad):m.start()], "match": m.group(0), "after": text[m.end():m.end() + pad]}
+
+
 def answer(item, city):
+    """Cached per (city, item): repeat questions cost no quota and the judge tour stays instant."""
+    key = f"{city}|{norm(item)}"
+    if key not in _memo:
+        a = _answer(item, city)
+        if a is None or a["class"] is None and not a.get("silent"):
+            return a
+        with _lock:
+            _memo[key] = a
+            ANSWERS.write_text(json.dumps(_memo), encoding="utf-8")
+    return _memo[key]
+
+
+def _answer(item, city):
     page = CACHE / f"{city}.txt"
     if not page.exists():
         return None
@@ -67,11 +96,13 @@ def answer(item, city):
     m = re.search(r"\{.*\}", txt, re.S)
     a = json.loads(m.group(0)) if m else {}
     if a.get("class") not in CLASSES:
-        return {"class": None, "bin": None, "quote": "", "verified": False, "source": None}
+        return {"class": None, "bin": None, "quote": "", "verified": False, "source": None, "context": None,
+                "silent": bool(m)}  # a parsed reply without a class means the page doesn't say: worth caching
     q = str(a.get("quote", ""))
     # a quote not found on the page is not shown as a rule
-    src = next((s.split(None, 1)[0] for s in text.split("SOURCE ")[1:] if q and norm(q) in norm(s)), None)
-    return {"class": a["class"], "bin": BIN[a["class"]], "quote": q if src else "", "verified": bool(src), "source": src}
+    seg = next((s for s in text.split("SOURCE ")[1:] if q and norm(q) in norm(s)), None)
+    return {"class": a["class"], "bin": BIN[a["class"]], "quote": q if seg else "", "verified": bool(seg),
+            "source": seg.split(None, 1)[0] if seg else None, "context": context(seg, q) if seg else None}
 
 
 def identify(data_url):
