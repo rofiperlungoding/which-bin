@@ -1,18 +1,34 @@
 """Demo: item + city -> bin, with the city's own rule quoted and checked verbatim against the official page.
 
-  GW_KEY=... python app.py      then open http://localhost:8000
+  GW_URL=... GW_KEY=... python app.py      then open http://localhost:8000 (landing page) or /demo
 """
-import html, json, os, re, urllib.parse, urllib.request
-from http.server import BaseHTTPRequestHandler, HTTPServer
+import html, json, os, re, threading, time, urllib.parse, urllib.request
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from baseline import GW, TASK
 from bench import CLASSES
 from extract import norm
 
 CACHE = Path(__file__).with_name("cache")
+SITE = Path(__file__).with_name("site") / "index.html"
 MODEL = os.environ.get("APP_MODEL", "gemini/gemini-3.5-flash-lite")
 BIN = {"recycle": "Recycling bin", "organics": "Food / green bin", "trash": "Garbage bin",
        "special": "Not a household bin: drop-off, take-back or hazardous collection"}
+
+
+_calls, _lock = [], threading.Lock()
+
+
+def budget(per_min=int(os.environ.get("CALLS_PER_MIN", "20"))):
+    """Global cap on model calls: a public demo must not burn the whole API quota.
+    ponytail: one global window, per-IP limits if one visitor starves the rest."""
+    with _lock:
+        now = time.time()
+        _calls[:] = [t for t in _calls if now - t < 60]
+        if len(_calls) >= per_min:
+            return False
+        _calls.append(now)
+        return True
 
 
 def answer(item, city):
@@ -20,6 +36,8 @@ def answer(item, city):
     if not page.exists():
         return None
     text = page.read_text(encoding="utf-8")[:60000]
+    if not budget():
+        raise RuntimeError("busy")
     prompt = (TASK + f"Item: {item}\nOfficial waste pages published by this city:\n{text}\n"
               'Return JSON only: {"class": "...", "quote": "<one sentence copied exactly from the pages that names this item or its category, max 30 words>"}')
     body = json.dumps({"model": MODEL, "temperature": 0, "max_tokens": 300,
@@ -39,6 +57,8 @@ def answer(item, city):
 
 def identify(data_url):
     """Photo -> short item name (vision model). Only names the item; the bin still comes from the city's page."""
+    if not budget():
+        raise RuntimeError("busy")
     body = json.dumps({"model": MODEL, "temperature": 0, "max_tokens": 30, "messages": [{"role": "user", "content": [
         {"type": "text", "text": "Name the single household item to throw away in this photo, in at most 6 words "
          "(material matters, e.g. 'greasy pizza box', 'disposable vape'). Reply with the name only."},
@@ -55,8 +75,8 @@ def page(item="", city="", result=""):
     return f"""<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Which bin?</title><style>body{{font:16px system-ui;max-width:36rem;margin:2rem auto;padding:0 16px}}
 input,select,button{{font:inherit;padding:.5rem;width:100%;margin:.25rem 0 1rem}}blockquote{{border-left:4px solid #888;margin:0;padding-left:1rem}}</style>
-<h1>Which bin?</h1><p>Answers follow your city's own published rules.</p>
-<form><label for="i">Item</label><input id="i" name="item" required value="{html.escape(item)}" placeholder="disposable vape">
+<p><a href="/">← Which Bin</a></p><h1>Which bin?</h1><p>Answers follow your city's own published rules.</p>
+<form action="/demo"><label for="i">Item</label><input id="i" name="item" required value="{html.escape(item)}" placeholder="disposable vape">
 <label for="c">City</label><select id="c" name="city">{opts}</select><button>Check</button></form>
 <label for="f">Or take a photo of the item</label><input id="f" type="file" accept="image/*" capture="environment">
 <script>f.onchange=()=>{{const r=new FileReader();r.onload=async()=>{{i.value="Identifying...";
@@ -79,14 +99,22 @@ class H(BaseHTTPRequestHandler):
         self.wfile.write(name)
 
     def do_GET(self):
-        q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+        url = urllib.parse.urlparse(self.path)
+        if url.path == "/":
+            out = SITE.read_bytes()
+            self.send_response(200); self.send_header("Content-Type", "text/html; charset=utf-8"); self.end_headers()
+            self.wfile.write(out); return
+        if url.path != "/demo":
+            self.send_response(404); self.end_headers(); return
+        q = urllib.parse.parse_qs(url.query)
         item, city = q.get("item", [""])[0][:100], q.get("city", [""])[0]
         result = ""
         if item and re.fullmatch(r"[a-z_]+", city):  # city names a cache file: no path tricks
             try:
                 a = answer(item, city)
             except Exception as e:
-                a, result = None, f"<p>Lookup failed ({html.escape(type(e).__name__)}).</p>"
+                msg = "Too many people are asking right now. Try again in a minute." if str(e) == "busy" else "Lookup failed."
+                a, result = None, f"<p>{msg}</p>"
             if a is None and not result:
                 result = "<p>No official page for this city yet.</p>"
             elif a and a["class"] is None:
@@ -101,4 +129,4 @@ class H(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    HTTPServer(("127.0.0.1", 8000), H).serve_forever()
+    ThreadingHTTPServer(("127.0.0.1", int(os.environ.get("PORT", "8000"))), H).serve_forever()
