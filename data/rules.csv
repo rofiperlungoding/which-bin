@@ -1,0 +1,95 @@
+city,country,item,class,local_stream,quote,url
+toronto,CA,pizza_box_greasy,organics,Green Bin,Food-soiled pizza boxes,https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/what-goes-in-my-green-bin/
+toronto,CA,plastic_bag,recycle,Blue Bin,Grocery/retail shopping bags,https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,paper_cup,recycle,Blue Bin,Paper-based and plastic-lined hot and cold beverage cups,https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,alu_foil,recycle,Blue Bin,"Aluminum foil, trays, burner liners, pie plates, roasting pans (free from food residue)",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,glass_jar,recycle,Blue Bin,"Bottles, jars (lids off)",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,pet_bottle,recycle,Blue Bin,Beverage bottles (lids on),https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,eps_takeaway,recycle,Blue Bin,"Food/drink packaging must be empty and rinsed (otherwise, place in garbage).",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,aa_battery,special,Household Hazardous Waste,Batteries (all types weighing less than 5 kg each,https://www.toronto.ca/services-payments/recycling-organics-garbage/household-hazardous-waste/
+toronto,CA,charging_cable,trash,Garbage Bin,"Throw unwanted cords, hoses and cables in your garbage.",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,carton,recycle,Blue Bin,"Cartons and boxes (from juice, milk, soup)",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,pet_clamshell,recycle,Blue Bin,"Clear food containers/clamshells (e.g. from berries, vegetables, mixed greens)",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,pp_cup,recycle,Blue Bin,"Food jars, tubs (lids on)",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,shredded_paper,recycle,Blue Bin,"Shredded paper (put in clear plastic bag, tie closed)",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,led_bulb,special,Household Hazardous Waste,Light emitting diode (LED) bulbs,https://www.toronto.ca/services-payments/recycling-organics-garbage/household-hazardous-waste/
+toronto,CA,paper_towel,organics,Green Bin,"soiled paper towels, facial tissues and napkins",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/what-goes-in-my-green-bin/
+toronto,CA,aerosol_empty,recycle,Blue Bin,Aerosol cans (empty; lids on),https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/changes-to-recycling-program/
+toronto,CA,drinking_glass,trash,Garbage Bin,"Broken mugs, dishes",https://www.toronto.ca/services-payments/recycling-organics-garbage/houses/what-goes-in-my-garbage-bin/
+nyc,US,pizza_box_greasy,organics,Curbside Composting,Greasy uncoated paper plates and pizza boxes,https://www.nyc.gov/site/dsny/collection/residents/curbside-composting.page
+nyc,US,plastic_bag,trash,Trash,"Soft plastics (plastic bags, bubble wrap, plastic mailing envelopes",https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,paper_cup,recycle,Recycling (mixed paper),paper cups (empty and dry),https://www.nyc.gov/site/dsny/collection/get-rid-of/mixed-paper-cardboard.page
+nyc,US,alu_foil,recycle,Recycling,aluminum foil and trays,https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,glass_jar,recycle,Recycling,You can recycle glass bottles and jars.,https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,pet_bottle,recycle,Recycling,"food and drink containers, caps and lids",https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,eps_takeaway,trash,Trash,"Foam products (Styrofoam, packing peanuts)",https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,aa_battery,trash,Trash,Non-rechargable alkaline batteries can be discarded with regular trash.,https://www.nyc.gov/site/dsny/collection/get-rid-of/batteries.page
+nyc,US,charging_cable,trash,Trash,"Tanglers (cables, wires, extension cords, string lights, garden hoses, window blinds)",https://www.nyc.gov/site/dsny/collection/residents/trash.page
+nyc,US,carton,recycle,Recycling,beverage and liquid food cartons like milk and soup cartons and juice boxes,https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,pet_clamshell,recycle,Recycling,You can recycle most rigid plastics,https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,pp_cup,recycle,Recycling,the recycling number on the package doesn't matter,https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,led_bulb,trash,Trash,"Dispose of light bulbs (incandescent, LED, compact fluorescent/CFL) with your trash.",https://www.nyc.gov/site/dsny/collection/get-rid-of/light-bulbs.page
+nyc,US,paper_towel,trash,Trash,"Soft tissues, napkins, and paper towels",https://www.nyc.gov/site/dsny/collection/residents/trash.page
+nyc,US,aerosol_empty,recycle,Recycling,empty aerosol and paint cans,https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,drinking_glass,trash,Trash,You CANNOT recycle drinking glasses,https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+nyc,US,toothpaste_tube,trash,Trash,"Plastic tubes and pouches (toothpaste tubes, fruit pouches)",https://www.nyc.gov/site/dsny/collection/residents/trash.page
+nyc,US,plastic_cap,recycle,Recycling,caps and lids,https://www.nyc.gov/site/dsny/collection/get-rid-of/metal-glass-plastic-cartons.page
+vancouver,CA,pizza_box_greasy,organics,Green Bin - Curbside,This item can be placed in your Green Bin.,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,plastic_bag,special,Free Drop-Off - Vancouver Zero Waste Centre,This item may be dropped off for free at the Vancouver Zero Waste Centre,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,paper_cup,recycle,Containers - Curbside,This item can be placed in your blue box (single family homes) or Containers cart,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,alu_foil,recycle,Containers - Curbside,This item can be placed in your blue box (single family homes) or Containers cart,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,glass_jar,recycle,Glass bottles & Jars - Curbside,Glass bottles & Jars - Curbside,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,pet_bottle,special,Return-It Beverage containers - Drop-Off,All ready-to-drink beverage containers carry a deposit fee on them.,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,eps_takeaway,special,Free Drop-Off - Vancouver Zero Waste Centre,This item may be dropped off for free at the Vancouver Zero Waste Centre,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,vape,special,Vapecycle (mail-in),This item can be shipped to Vapecycle.,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,aa_battery,special,Recycle Your Batteries Canada! - Drop-Off,This item is included in a province-wide stewardship program,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,charging_cable,special,Return-It Electronics - Drop-Off,This item ... can be dropped off for free as part of Encorp's Return-It Electronics,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,carton,special,Return-It Beverage containers - Drop-Off,All ready-to-drink beverage containers carry a deposit fee on them.,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,pet_clamshell,recycle,Containers - Curbside,This item can be placed in your blue box (single family homes) or Containers cart,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,pp_cup,recycle,Containers - Curbside,This item can be placed in your blue box (single family homes) or Containers cart,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,shredded_paper,recycle,Mixed Paper,Place shredded paper into a secured paper bag or boxboard box,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,led_bulb,special,LightRecycle - Drop-Off,This item is included in a province-wide recycling program for lighting products,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,paper_towel,organics,Green Bin - Curbside,This item can be placed in your Green Bin.,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,aerosol_empty,recycle,Containers - Curbside,This item can be placed in your blue box (single family homes) or Containers cart,https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,drinking_glass,trash,Garbage - Curbside (if not reusable),"If the item is still usable, consider donating it",https://vancouver.ca/home-property-development/waste-wizard.aspx
+vancouver,CA,toothpaste_tube,trash,Garbage - Curbside,This item can be disposed of in your Garbage bin.,https://vancouver.ca/home-property-development/waste-wizard.aspx
+shibuya,JP,plastic_bag,recycle,資源,レジ袋 | 資源,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,paper_cup,trash,可燃ごみ,紙コップ | 可燃ごみ,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,alu_foil,trash,不燃ごみ,アルミホイル・アルミ箔 | 不燃ごみ,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,glass_jar,recycle,資源,ガラスびん（飲食料用）| 資源,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,pet_bottle,recycle,資源,中をすすいでつぶしてから出してください。,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,eps_takeaway,recycle,資源,発泡スチロール | 資源,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,aa_battery,trash,不燃ごみ,電池（マンガン・アルカリ）| 不燃ごみ,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,carton,special,拠点回収または可燃ごみ,紙パック | 拠点回収または可燃ごみ,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,led_bulb,trash,不燃ごみ,水銀を含まない白熱電球・LED電球などは不燃ごみで出してください。,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,aerosol_empty,recycle,資源,必ず使い切ってから、びんと缶とは別の袋に入れて出してください。,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,drinking_glass,trash,不燃ごみ,グラス、コップ類は資源になりません。,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+shibuya,JP,plastic_cap,recycle,資源,キャップ（プラスチック製）| 資源,https://www.city.shibuya.tokyo.jp/kurashi/gomi/kateigomi/gomi_hinmoku.html
+berlin,DE,plastic_bag,recycle,Wertstofftonne,"Folien, z. B. Einwickelfolie, Plastiktüten",https://www.bsr.de/wertstoffe
+berlin,DE,alu_foil,recycle,Wertstofftonne,"Alufolien, -deckel, -schalen",https://www.bsr.de/wertstoffe
+berlin,DE,glass_jar,recycle,Altglas,"Gläser, zum Beispiel für Marmelade oder Babynahrung",https://www.bsr.de/altglas
+berlin,DE,pet_bottle,recycle,Wertstofftonne,"Kunststoffflaschen, z. B. für Pflege-, Spül-, Waschmittel",https://www.bsr.de/wertstoffe
+berlin,DE,eps_takeaway,recycle,Wertstofftonne,"Schaumstoffe, z. B. Styroporschalen für Lebensmittel",https://www.bsr.de/wertstoffe
+berlin,DE,aa_battery,special,grüne Batterietonne,in die grüne Batterietonne,https://www.bsr.de/elektrogeraete
+berlin,DE,carton,recycle,Wertstofftonne,Getränkekartons,https://www.bsr.de/wertstoffe
+berlin,DE,pp_cup,recycle,Wertstofftonne,"Becher, z. B. für Joghurt, Margarine",https://www.bsr.de/wertstoffe
+berlin,DE,led_bulb,special,Recyclinghof,Energiespar- und LED-Lampen musst du jedoch unzerbrochen bei einem unserer Berliner Recyclinghöfe abgeben.,https://www.bsr.de/elektrogeraete
+berlin,DE,plastic_cap,recycle,Wertstofftonne,"Getränke-, Konservendosen, Flaschenverschlüsse",https://www.bsr.de/wertstoffe
+camden,GB,plastic_bag,recycle,Recycling,carrier bags (empty and untied),https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,alu_foil,recycle,Recycling,"metal – including tins, cans, aerosols, aluminium foil and bottle tops",https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,glass_jar,recycle,Recycling,glass – including bottles and jars,https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,pet_bottle,recycle,Recycling,"plastic – including bottles, pots, tubs, cartons and carrier bags",https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,eps_takeaway,trash,Rubbish,polystyrene,https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,vape,special,Regis Road Reuse and Recycling Centre,"Vapes, electrical items, household and lithium batteries ... become extremely flammable when they are crushed.",https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,aa_battery,special,Regis Road Reuse and Recycling Centre,"Vapes, electrical items, household and lithium batteries ... become extremely flammable when they are crushed.",https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,charging_cable,special,Regis Road Reuse and Recycling Centre,"We won't collect your recycling if it contains ... electricals",https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,carton,recycle,Recycling,"plastic – including bottles, pots, tubs, cartons and carrier bags",https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,pp_cup,recycle,Recycling,"plastic – including bottles, pots, tubs, cartons and carrier bags",https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,aerosol_empty,recycle,Recycling,"metal – including tins, cans, aerosols, aluminium foil and bottle tops",https://www.camden.gov.uk/what-goes-in-bins
+camden,GB,drinking_glass,trash,Rubbish,"broken glass – carefully wrapped, so that it is not dangerous to collect",https://www.camden.gov.uk/what-goes-in-bins
+san_francisco,US,plastic_bag,special,Take-back / drop-off,Use a take-back service or drop-off location near you.,https://www.sfenvironment.org/sfrecycles/item/plastic-bags-plastic-wrap
+san_francisco,US,glass_jar,recycle,Blue bin,blue bin filled with recyclable products like milk cartons and glass jars,https://www.sfenvironment.org/sfrecycles/
+san_francisco,US,aa_battery,special,Special handling,Special handling. Don't put in any bin.,https://www.sfenvironment.org/sfrecycles/item/household-batteries
+san_francisco,US,carton,recycle,Blue bin,blue bin filled with recyclable products like milk cartons and glass jars,https://www.sfenvironment.org/sfrecycles/
+san_francisco,US,led_bulb,special,Special handling,Special handling. Don't put in any bin.,https://www.sfenvironment.org/sfrecycles/item/light-bulbs-led
+phoenix,US,aa_battery,special,Household Hazardous Waste,Do not place any chemicals or batteries in your trash receptacle,https://www.phoenix.gov/administration/departments/publicworks/residential-trash-recycling/household-hazardous-waste-collection.html

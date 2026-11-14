@@ -1,0 +1,207 @@
+city,country,item,class,local_stream,quote,url
+winchester,GB,pizza_box_greasy,trash,general waste bin,"Greasy cardboard, such as pizza boxes, is not suitable for recycling and should be placed in your general waste bin for disposal.",https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,plastic_bag,trash,general waste bin,"If they cannot be reused, plastic carrier bags shoudl be put in your general waste bin.",https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,paper_cup,trash,general waste bin,Please do not put your takeaway coffee cups in your recycling bin.,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,alu_foil,trash,general waste bin,Aluminium foil is made from a different material to aluminium cans and cannot be recycled from home. Please place it in your general waste bin.,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,glass_jar,recycle,glass collection box,Unbroken glass bottles and jars can be recycled in your glass collection box.,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,pet_bottle,recycle,recycling bin,These can be recycled in your recycling bin.,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,eps_takeaway,trash,general waste bin,"Along with other types of mixed plastic, this material cannot currently be recycled.",https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,vape,special,Household Waste Recycling Centre / small electrical collection,Please DO NOT DISPOSE of vapes and e-cigarettes in your general waste or recycling bin,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,aa_battery,special,top of your waste or recycling bin on collection day / retail outlets,"To recycle small (household) batteries, place them in a small, clear plastic bag (e.g. a sandwich bag), and leave them on top of your waste or recycling bin on collection day.",https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,charging_cable,special,carrier bag next to your waste or recycling bin on collection day,"To recycle any small electrical item that uses batteries or plugs, place them in a carrier bag and put them next to your waste or recycling bin on collection day.",https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,carton,trash,general waste bin,"Cartons, including Tetra Pak, cannot be put in your recycling bin. Please place them in your general waste bin",https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,pet_clamshell,trash,general waste bin,"Plastic pots, tubs, trays, cartons and flexible plastics are not yet recyclable from home anywhere in Hampshire, so cannot be put in your green recycling bin.",https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,pp_cup,trash,general waste bin,Please place your margarine tubs in your general waste bin.,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,led_bulb,special,Household Waste Recycling Centre,LED lightbulbs should be taken to a Household Waste Recycling Centre for recycling.,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,paper_towel,trash,general waste bin,Kitchen roll / kitchen paper cannot be recycled and must go into your general waste bin.,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,aerosol_empty,recycle,recycling bin,Place your empty aerosol cans in your recycling bin.,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,drinking_glass,trash,general waste bin,"If the glass is broken, it should be wrapped and put in your general waste bin.",https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+winchester,GB,plastic_cap,recycle,recycling bin,Plastic bottle tops can be loosely screwed onto their bottle and placed in the recycling bin.,https://www.winchester.gov.uk/waste-recycling/a-z-of-waste-and-recycling
+barnsley,GB,pizza_box_greasy,trash,grey bin,"Cardboard contaminated by food, etc must be disposed of in your grey bin.",https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,plastic_bag,trash,Plastic bags and wrapping (soft plastics),Carrier bags that are no longer reusable can be recycled at most supermarkets.,https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,alu_foil,recycle,brown bin,Clean aluminium foil can go in your brown bin.,https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,glass_jar,recycle,Brown bin,Glass bottles and jars - any colour Brown bin Glass,https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,pet_bottle,recycle,Brown bin,Plastic bottles Brown bin Plastic bottles,https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,vape,special,e-cigarettes and vapes,Don't put vapes in any bin . Empty vapes can be recycled at your recycling centre,https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,aa_battery,special,Batteries,"Recycling centres accept used batteries from most items including toys, household appliances, mobile phones and cordless tools.",https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,pet_clamshell,recycle,Brown bin,"Plastic food trays (eg meat trays, fruit punnets) Brown bin Non-recyclable waste Plastic food trays should be put in your brown bin.",https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,pp_cup,recycle,Brown bin,Yoghurt pots should be put in your brown bin.,https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,led_bulb,special,Florescent tubes,Domestic light bulbs and strip lighting should be taken to the recycling centre. Don't put light bulbs in your bin.,https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,aerosol_empty,recycle,Brown bin,"Empty domestic aerosols such as deodorants, hairspray and air freshener style can be put in the brown bin.",https://www.barnsley.gov.uk/waste-a-z
+barnsley,GB,drinking_glass,trash,Grey bin,"If it can't be reused it should be put in your grey bin, as the glass can't be recycled in the blue bin.",https://www.barnsley.gov.uk/waste-a-z
+charnwood,GB,pizza_box_greasy,recycle,green recycling bin,Clean pizza boxes,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,plastic_bag,recycle,green recycling bin,"Carrier bags and packaging film, cling film and bubble wrap (clean)",https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,alu_foil,recycle,green recycling bin,Clean foil,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,glass_jar,recycle,green recycling bin,"Jars - Lids will be taken, please screw them back on",https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,eps_takeaway,trash,general waste / not to recycle,Blocks of polystyrene,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,vape,special,Leicestershire County Council,E-cigarette batteries (Please contact Leicestershire County Council for more information),https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,aa_battery,special,Recycling and Household Waste Sites (tips) / Retailers,"Leicestershire County Council’s Recycling and Household Waste Sites (tips) in Loughborough, Shepshed and Mountsorrel all accept batteries for recycling.",https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,charging_cable,trash,general waste / not to recycle,Electrical appliances,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,carton,recycle,green recycling bin,Food and drink cartons (commonly known as TetraPak),https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,pet_clamshell,recycle,green recycling bin,"Clear food trays, fruit punnets including the lids",https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,pp_cup,recycle,green recycling bin,Yogurt pots,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,shredded_paper,recycle,green recycling bin,Shredded paper,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,led_bulb,special,tip,Used light bulbs should not be placed into any of Charnwood’s domestic refuse or recycling bins. Instead they should be taken to the tip,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,paper_towel,trash,general waste / not to recycle,Kitchen paper,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,aerosol_empty,recycle,green recycling bin,Empty aerosol cans,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,drinking_glass,trash,general waste bin,Broken drinking glasses should be wrapped up and placed in your general waste bin.,https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,toothpaste_tube,trash,general waste / not to recycle,"Metal tubes, such as tomato puree",https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+charnwood,GB,plastic_cap,recycle,green recycling bin,"Glass Bottles - Lids will be taken, please screw them back on",https://www.charnwood.gov.uk/pages/what_can_and_cannot_be_recycled
+denbighshire,GB,alu_foil,recycle,Trolibocs (middle box with red flap),"Metal cans, tins, empty aerosols and clean foil",https://www.sirddinbych.gov.uk/en/bins-and-recycling/service-changes/guides-and-information/what-goes-where.aspx
+denbighshire,GB,glass_jar,recycle,Trolibocs (bottom box with green flap),Glass bottles and jars (no tops or lids).,https://www.sirddinbych.gov.uk/en/bins-and-recycling/service-changes/guides-and-information/what-goes-where.aspx
+denbighshire,GB,pet_bottle,recycle,Trolibocs (middle box with red flap),"Plastic bottles, pots, tubs and trays",https://www.sirddinbych.gov.uk/en/bins-and-recycling/service-changes/guides-and-information/what-goes-where.aspx
+denbighshire,GB,aa_battery,recycle,Pink battery clip,"Used household batteries. (AAA, AA, B, C, D, DD and 9V batteries.)",https://www.sirddinbych.gov.uk/en/bins-and-recycling/service-changes/guides-and-information/what-goes-where.aspx
+denbighshire,GB,carton,recycle,Trolibocs (middle box with red flap),"Food and drink cartons, such as Tetra Pak",https://www.sirddinbych.gov.uk/en/bins-and-recycling/service-changes/guides-and-information/what-goes-where.aspx
+denbighshire,GB,pet_clamshell,recycle,Trolibocs (middle box with red flap),"Plastic bottles, pots, tubs and trays",https://www.sirddinbych.gov.uk/en/bins-and-recycling/service-changes/guides-and-information/what-goes-where.aspx
+denbighshire,GB,pp_cup,recycle,Trolibocs (middle box with red flap),"Plastic bottles, pots, tubs and trays",https://www.sirddinbych.gov.uk/en/bins-and-recycling/service-changes/guides-and-information/what-goes-where.aspx
+denbighshire,GB,aerosol_empty,recycle,Trolibocs (middle box with red flap),"Metal cans, tins, empty aerosols and clean foil",https://www.sirddinbych.gov.uk/en/bins-and-recycling/service-changes/guides-and-information/what-goes-where.aspx
+denbighshire,GB,plastic_cap,recycle,Trolibocs (middle box with red flap),Metal lids from glass bottles and jars,https://www.sirddinbych.gov.uk/en/bins-and-recycling/service-changes/guides-and-information/what-goes-where.aspx
+guildford,GB,plastic_bag,trash,No thanks (Green recycling bin),Plastic carrier bags,https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,alu_foil,recycle,Green recycling bin,Clean foil and foil trays,https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,glass_jar,recycle,Green recycling bin,Glass bottles and jars,https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,pet_bottle,recycle,Green recycling bin,"Plastic bottles, tubs, pots and trays",https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,eps_takeaway,trash,No thanks (Green recycling bin),Expanded polystyrene,https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,vape,special,Batteries and Vapes,"Batteries, including those found in everyday items like vapes, must not be placed into any household bin.",https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,aa_battery,special,Batteries and Vapes,"Batteries, including those found in everyday items like vapes, must not be placed into any household bin.",https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,carton,recycle,Green recycling bin,"Empty tins, cans and cartons",https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,pet_clamshell,recycle,Green recycling bin,"Plastic bottles, tubs, pots and trays",https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,pp_cup,recycle,Green recycling bin,"Plastic bottles, tubs, pots and trays",https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,aerosol_empty,recycle,Green recycling bin,Empty aerosol cans,https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,drinking_glass,trash,No thanks (Green recycling bin),"Drinking glasses, crockery or Pyrex",https://guildford.gov.uk/whatgoesinmybins
+guildford,GB,plastic_cap,recycle,Green recycling bin,"Plastic and metal lids, caps and bottle tops",https://guildford.gov.uk/whatgoesinmybins
+fife,GB,pizza_box_greasy,trash,Blue bin (general waste),Do not put in: food or drink-soiled paper or card,https://www.fife.gov.uk/bins-and-recycling/household-bins/what-goes-in-your-bins
+fife,GB,plastic_bag,recycle,Green bin (cans and plastics),"You can also put in: plastic bags and wrapping, including: plastic pouches carrier bags",https://www.fife.gov.uk/bins-and-recycling/household-bins/what-goes-in-your-bins
+fife,GB,pet_bottle,recycle,Green bin (cans and plastics),"You can put in: plastic bottles, plastic pots, tubs and trays",https://www.fife.gov.uk/bins-and-recycling/household-bins/what-goes-in-your-bins
+fife,GB,vape,special,Recycling Centre,"Never place batteries, vapes or small electrical items in any household bin, as they can cause fires. Recycle them correctly at your nearest Recycling Centre",https://www.fife.gov.uk/bins-and-recycling/household-bins/what-goes-in-your-bins
+fife,GB,aa_battery,special,Recycling Centre,"Never place batteries, vapes or small electrical items in any household bin, as they can cause fires. Recycle them correctly at your nearest Recycling Centre",https://www.fife.gov.uk/bins-and-recycling/household-bins/what-goes-in-your-bins
+fife,GB,charging_cable,special,Recycling Centre,"Never place batteries, vapes or small electrical items in any household bin, as they can cause fires. Recycle them correctly at your nearest Recycling Centre",https://www.fife.gov.uk/bins-and-recycling/household-bins/what-goes-in-your-bins
+fife,GB,pet_clamshell,recycle,Green bin (cans and plastics),"You can put in: plastic bottles, plastic pots, tubs and trays",https://www.fife.gov.uk/bins-and-recycling/household-bins/what-goes-in-your-bins
+fife,GB,pp_cup,recycle,Green bin (cans and plastics),"You can put in: plastic bottles, plastic pots, tubs and trays",https://www.fife.gov.uk/bins-and-recycling/household-bins/what-goes-in-your-bins
+belfast,GB,pizza_box_greasy,organics,Compost bin,Takeaway pizza boxes (torn up),https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,plastic_bag,trash,General waste bin,Plastic bags and mixed rubbish,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,paper_cup,trash,General waste bin,Takeaway coffee cups,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,alu_foil,recycle,Recycling bin / recycling boxes,Aluminium foil (clean),https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,glass_jar,recycle,Recycling boxes,Glass bottles and jars,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,pet_bottle,recycle,Recycling bin / recycling boxes,"Empty plastic bottles, pots, tubs and trays",https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,eps_takeaway,trash,General waste bin,Polystyrene foam Takeaway drinks containers,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,vape,special,Recycling centre,Our recycling centres also have disposable vape recycling bins.,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,aa_battery,special,Shop / recycling centre,Most shops that sell batteries have a battery recycling bin. They can also be taken to a recycling centre.,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,charging_cable,special,Recycling centre,Other small electrical items can be taken to recycling centres.,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,carton,recycle,Recycling bin / recycling boxes,Cartons (including TetraPak),https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,pet_clamshell,recycle,Recycling bin / recycling boxes,"Empty plastic bottles, pots, tubs and trays",https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,pp_cup,recycle,Recycling bin / recycling boxes,"Empty plastic bottles, pots, tubs and trays",https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,shredded_paper,organics,Compost bin,Shredded paper,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,paper_towel,organics,Compost bin,Wet paper and wet cardboard,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,aerosol_empty,recycle,Recycling bin / recycling boxes,Aerosol cans,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,drinking_glass,trash,General waste bin,Broken glass,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+belfast,GB,plastic_cap,trash,General waste bin,Keep lids on bottles – we cannot take loose lids in recycling.,https://www.belfastcity.gov.uk/bins/what-goes-in-bins-boxes
+city_of_london,GB,pizza_box_greasy,trash,household waste,"Pizza boxes can be recycled only if it is clean and dry, otherwise place it in your household waste.",https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,plastic_bag,trash,household waste,"Plastic bags, including those used for salad, bread, rice/pasta should be placed in the household waste.",https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,paper_cup,trash,waste bin,Coffee Cups (disposable) can be taken to various points around the City to be recycled. Or place in your waste bin,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,alu_foil,recycle,clear recycling bag or recycling bin,Aluminium foil - clean - can be recycled in your clear recycling bag or recycling bin.,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,pet_bottle,recycle,clear recycling sack or recycling bin,Bottles - both plastic and glass - can be rinsed and placed in your clear recycling sack or recycling bin.,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,eps_takeaway,trash,household waste bag or bin,Polystyrene packaging expanded polystyrene should be placed in your household waste bag or bin.,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,vape,special,drop off point or shops,You can take your used vapes to Tesco on Cheapside where they have a drop off point,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,aa_battery,special,recycling points on City estates and libraries or supermarkets,City of London residents can also recycle their household batteries at various recycling points on City estates and libraries across the City,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,carton,recycle,clear bag or recycling bin,Cartons can be recycled in your clear bag or recycling bin.,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,pet_clamshell,recycle,clear recycling bag or recycling bin,"a lot of plastic (bottles and food pots, tubs and trays) can be recycled in your clear recycling bag or recycling bin.",https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,pp_cup,recycle,clear recycling bag,Yogurt pots can be included in your clear recycling bag. Please rinse them first.,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,shredded_paper,recycle,clear recycling bag,Confidential waste like shredded paper can be placed first into an envelope or a small box such as a cereal box and then placed into your clear recycling bag.,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,paper_towel,trash,household waste bin or bag,Kitchen roll cannot be recycled. Place it in your household waste bin or bag.,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,aerosol_empty,recycle,clear recycling bag or recycling bin,Aerosol cans can be recycled in your clear recycling bag or recycling bin.,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,drinking_glass,trash,household waste,"glass from windows, drinking glasses, furniture etc. cannot be recycled.",https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+city_of_london,GB,toothpaste_tube,special,TerraCycle scheme,Toothbrushes and (empty) toothpaste tubes can be taken to Bow Lane Dental (2a Bow Lane) to be recycled through their TerraCycle scheme.,https://www.cityoflondon.gov.uk/services/waste-and-recycling/household-waste-and-recycling/reduce-reuse-recycle-a-z
+saint_paul,US,pizza_box_greasy,recycle,recycling cart,Delivery pizza boxes,https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,plastic_bag,special,Ramsey County Environmental Center,Recycle plastic film and bags (except black plastic) by bringing them to the Ramsey County Environmental Center,https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,alu_foil,recycle,recycling cart,Aluminum foil and trays,https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,glass_jar,recycle,recycling cart,Food and beverage bottles and jars,https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,pet_bottle,recycle,recycling cart,"Water, soda, and juice bottles",https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,eps_takeaway,trash,garbage cart,"Place these items in your garbage cart, except for paper egg cartons",https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,aa_battery,special,Ramsey County's Environmental Center,"Bring your electronics, batteries, and lights for safe disposal at Ramsey County's Environmental Center",https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,charging_cable,special,Ramsey County’s Hazardous Waste Facility,Bring these items for safe disposal at Ramsey County’s Hazardous Waste Facility,https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,carton,recycle,recycling cart,Milk cartons Juice boxes,https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,pet_clamshell,recycle,recycling cart,Hard-plastic produce and take-out containers,https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,pp_cup,recycle,recycling cart,"Plastic cups and containers Yogurt, pudding, and fruit cups",https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,shredded_paper,special,local shredding companies and print shops,Many local shredding companies and print shops accept shredded paper.,https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,led_bulb,special,Ramsey County's Environmental Center,"Bring your electronics, batteries, and lights for safe disposal at Ramsey County's Environmental Center",https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,aerosol_empty,recycle,recycling cart,Empty aerosol cans (no cans that contained hazardous or flammable materials),https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+saint_paul,US,plastic_cap,recycle,recycling cart,"Empty, rinse, and replace caps or lids. Recycle with the cap or lid on.",https://www.stpaul.gov/departments/public-works/recycling-and-waste-reduction/accepted-materials
+philadelphia,US,pizza_box_greasy,trash,regular trash,Greasy or food-soiled paper and cardboard,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,plastic_bag,trash,regular trash,"Plastic bags, bagged recycling",https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,paper_cup,recycle,recycling bin,Paper cups,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,glass_jar,recycle,recycling bin,All bottles and jars,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,pet_bottle,recycle,recycling bin,"Plastic bottles, cups, and jugs",https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,eps_takeaway,trash,regular trash,Styrofoam™,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,aa_battery,trash,regular trash,Batteries and electronics,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,charging_cable,trash,regular trash,Batteries and electronics,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,carton,recycle,recycling bin,Milk Juice Wine Soup,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,pp_cup,recycle,recycling bin,"Plastic bottles, cups, and jugs",https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,shredded_paper,trash,regular trash,Shredded paper,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,paper_towel,trash,regular trash,"Tissues, paper towels, and napkins",https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,aerosol_empty,recycle,recycling bin,Empty aerosol cans,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+philadelphia,US,plastic_cap,recycle,recycling bin,Jar lids and bottle caps on empty containers,https://www.phila.gov/programs/recycling-program/what-to-recycle/
+st_louis,US,pizza_box_greasy,trash,trash dumpster (brown) or rollcart (green),Greasy Pizza Boxes (Tip: Trash the greasy bottom and recycle the top),https://stlcityrecycles.com/what-bin
+st_louis,US,plastic_bag,special,grocery store drop-off location,Plastic Bags (Take them back to the grocery store. Find a dropoff location ),https://stlcityrecycles.com/what-bin
+st_louis,US,paper_cup,trash,trash dumpster (brown) or rollcart (green),Paper Cups,https://stlcityrecycles.com/what-bin
+st_louis,US,alu_foil,recycle,blue recycling dumpster or rollcart,Aluminum Foil (Clean),https://stlcityrecycles.com/what-bin
+st_louis,US,glass_jar,recycle,blue recycling dumpster or rollcart,Glass Jars (Lids and labels okay to leave on),https://stlcityrecycles.com/what-bin
+st_louis,US,pet_bottle,recycle,blue recycling dumpster or rollcart,Plastic Bottles (Lids and labels okay to leave on),https://stlcityrecycles.com/what-bin
+st_louis,US,eps_takeaway,trash,trash dumpster (brown) or rollcart (green),"Styrofoam (foam cups, plates, to-go boxes, foam packing materials, etc.)",https://stlcityrecycles.com/what-bin
+st_louis,US,aa_battery,special,St. Louis Household Hazardous Waste dropoff sites,Alkaline Batteries ( Find a place to reuse or recycle your item ),https://stlcityrecycles.com/what-bin
+st_louis,US,charging_cable,special,Bulk Pickup / transfer station,"Electronics (Computers, printers, telephones, power cords, etc. Find a place to reuse or recycle your item )",https://stlcityrecycles.com/what-bin
+st_louis,US,carton,recycle,blue recycling dumpster or rollcart,Cartons (Only cartons from the shelf or refrigerated sections. Cartons from the freezer need to go in the trash),https://stlcityrecycles.com/what-bin
+st_louis,US,pet_clamshell,recycle,blue recycling dumpster or rollcart,Plastic Jugs & Containers (Lids and labels okay to leave on),https://stlcityrecycles.com/what-bin
+st_louis,US,pp_cup,recycle,blue recycling dumpster or rollcart,Plastic Tubs (Lids and labels okay to leave on),https://stlcityrecycles.com/what-bin
+st_louis,US,paper_towel,trash,trash dumpster (brown) or rollcart (green),"Napkins, Paper Towels & Tissues",https://stlcityrecycles.com/what-bin
+st_louis,US,aerosol_empty,special,Household Hazardous Waste,Aerosols,https://stlcityrecycles.com/what-bin
+st_louis,US,drinking_glass,trash,trash dumpster (brown) or rollcart (green),"Glass or Ceramic Plates, Glasses, Cookware or Bakeware (If in usable condition, donate it !)",https://stlcityrecycles.com/what-bin
+st_louis,US,plastic_cap,recycle,blue recycling dumpster or rollcart,Plastic Bottles (Lids and labels okay to leave on),https://stlcityrecycles.com/what-bin
+san_diego,US,glass_jar,recycle,recycling container,Glass Bottles and Jars,https://www.sandiego.gov/sites/default/files/what-goes-where.pdf
+san_diego,US,vape,special,Miramar Household Hazardous Waste Transfer Facility,Residents can bring hazardous waste to Miramar Household Hazardous Waste Transfer Facility for free by appointment only.,https://www.sandiego.gov/sites/default/files/what-goes-where.pdf
+san_diego,US,charging_cable,trash,trash,"wires, electronics, hazardous waste, chemicals, batteries",https://www.sandiego.gov/sites/default/files/what-goes-where.pdf
+san_diego,US,carton,recycle,recycling container,Food and Beverage Paper Cartons,https://www.sandiego.gov/sites/default/files/what-goes-where.pdf
+san_diego,US,shredded_paper,recycle,recycling container,Mixed Paper and Shredded Paper (shredded paper must be in a closed paper bag),https://www.sandiego.gov/sites/default/files/what-goes-where.pdf
+san_diego,US,paper_towel,organics,green bin,"Food-Soiled Paper (paper towels, napkins, paper bags, parchment paper and coffee filters)",https://www.sandiego.gov/sites/default/files/what-goes-where.pdf
+salzburg,AT,plastic_bag,recycle,Gelbe Tonne oder Gelber Sack,Plastiksackerln Gelbe Tonne oder Gelber Sack,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,paper_cup,recycle,Gelbe Tonne oder Gelber Sack,Coffee-to-go-Becher Gelbe Tonne oder Gelber Sack,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,alu_foil,recycle,Gelbe Tonne oder Gelber Sack,Alufolien Gelbe Tonne oder Gelber Sack,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,glass_jar,recycle,Altglassammlung,Konservengläser Altglassammlung,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,pet_bottle,recycle,Gelbe Tonne oder Gelber Sack,Plastikflaschen (für Lebens- oder Körperpflegemittel) Gelbe Tonne oder Gelber Sack,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,aa_battery,special,Fachhandel (Rücknahmepflicht) od. Problemstoffsammlung,Batterien Fachhandel (Rücknahmepflicht) od. Problemstoffsammlung,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,carton,recycle,Gelbe Tonne oder Gelber Sack,Getränkepackerln Gelber Tonne oder Gelber Sack,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,pp_cup,recycle,Gelbe Tonne oder Gelber Sack,Joghurtbecher (löffelrein leer) Gelbe Tonne oder Gelber Sack,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,paper_towel,organics,Biotonne / Kompostierung,Küchenpapier/-rolle Biotonne / Kompostierung,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,aerosol_empty,recycle,Gelbe Tonne oder Gelber Sack,Druckgaspackungen leer Gelbe Tonne oder Gelber Sack,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,drinking_glass,trash,Restabfall,Trinkgläser Restabfall,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,toothpaste_tube,recycle,Gelbe Tonne oder Gelber Sack,"Zahnpastatuben aus Metall/Kunststoff, leer Gelbe Tonne oder Gelber Sack",https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+salzburg,AT,plastic_cap,recycle,Gelbe Tonne oder Gelber Sack,Kunststoffverschlüsse (Verpackung) Gelbe Tonne oder Gelber Sack,https://stadt-salzburg.at/fileadmin/landingpages/abfall/abfall_abc_2026.pdf
+vienna,AT,alu_foil,recycle,Gelbe Tonne,Alufolie (Gelbe Tonne),https://abfallberatung.wien.gv.at/wp-content/uploads/sites/63/2023/01/Muell-ABC_Loesungsblatt_NEU.pdf
+vienna,AT,pet_bottle,recycle,Gelbe Tonne,Plastikflasche (GelbeTonne),https://abfallberatung.wien.gv.at/wp-content/uploads/sites/63/2023/01/Muell-ABC_Loesungsblatt_NEU.pdf
+vienna,AT,carton,recycle,Gelbe Tonne,Milchkarton (Gelbe Tonne),https://abfallberatung.wien.gv.at/wp-content/uploads/sites/63/2023/01/Muell-ABC_Loesungsblatt_NEU.pdf
+vienna,AT,pp_cup,recycle,Gelbe Tonne,Joghurtbecher (Gelbe Tonne),https://abfallberatung.wien.gv.at/wp-content/uploads/sites/63/2023/01/Muell-ABC_Loesungsblatt_NEU.pdf
+bunkyo,JP,plastic_bag,recycle,プラスチック（資源）,プラスチック・ビニール製品 プラスチック（資源）,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,alu_foil,trash,不燃ごみ,アルミホイル 不燃ごみ,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,glass_jar,recycle,資源,びん（飲食用・食料用） 資源,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,pet_bottle,recycle,資源,ペットボトル 資源,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,eps_takeaway,recycle,プラスチック（資源）,発泡スチロール プラスチック（資源）,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,aa_battery,special,資源（拠点回収） / 不燃ごみ,乾電池（筒型の使い捨て一次電池） 資源（拠点回収） 不燃ごみ,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,carton,special,資源（拠点回収）,紙パック（内側が白い紙のもの） 資源（拠点回収） 紙パックの資源回収,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,pet_clamshell,recycle,プラスチック（資源）,食品トレイ（プラスチック製） プラスチック（資源）,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,pp_cup,recycle,プラスチック（資源）,プラスチック・ビニール製品 プラスチック（資源）,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,led_bulb,trash,不燃ごみ,電球 不燃ごみ,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,aerosol_empty,recycle,資源,スプレー缶、カセットボンベ（中身の入っていないもの） 資源,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,toothpaste_tube,recycle,プラスチック（資源）,プラスチック・ビニール製品 プラスチック（資源）,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+bunkyo,JP,plastic_cap,recycle,プラスチック（資源）,ペットボトルキャップ プラスチック（資源）,https://www.city.bunkyo.lg.jp/tetsuzuki/recycling/kateigomisigen/bunbetsulist.html
+yokohama,JP,paper_cup,recycle,古紙,紙コップ・紙皿 未使用のものは古紙へ。,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,alu_foil,recycle,缶・びん・ペットボトル,アルミはく ・アルミホイル 可,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,glass_jar,recycle,缶・びん・ペットボトル,（インスタント） コーヒーのびん 内ふたは燃やすごみ、 キ ャ ッ プはプラスチ ッ ク資源へ。缶,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,eps_takeaway,recycle,プラスチック資源,発泡スチロール プ,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,aa_battery,special,電池類,乾電池 （マンガン、 アルカリ、 リチウム一次電池）電,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,carton,recycle,古紙,飲料パック 水洗い して切り開く 。 内側がアルミのものは燃やす ごみへ。 紙,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,shredded_paper,recycle,古紙,シュレッダ ーにか けた紙 類 紙袋または半透明の袋に入れる。 紙,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,led_bulb,trash,燃やすごみ,LED （プラスチ ッ ク製） は燃やすごみへ。,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,aerosol_empty,special,スプレー缶,ヘアースプレー 中身は使い切って、 穴はあけない。 包装フィルムと キ ャ ッ プはプラスチ ッ ク資源へ。 ス,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,drinking_glass,trash,燃えないごみ,コ ッ プ 類（ ガ ラ ス 製 ） プラスチ ッ ク製のものはプラスチ ッ ク資源へ。 不,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yokohama,JP,toothpaste_tube,recycle,プラスチック資源,歯磨き粉のチューブ容器 中身を使い切って。 プ,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
+yogyakarta,ID,eps_takeaway,trash,sampah residu,"sampah residu ( pampers, pembalut, styrofoam, plastic alumunium, dll)",https://umumprotokol.jogjakota.go.id/download/hit/13912/pedoman-teknis-pengelolaan-sampah-balaikota-yogyakarta--tahun-20-13912.pdf
+yogyakarta,ID,toothpaste_tube,trash,sampah residu,"sampah residu ( pampers, pembalut, styrofoam, plastic alumunium, dll)",https://umumprotokol.jogjakota.go.id/download/hit/13912/pedoman-teknis-pengelolaan-sampah-balaikota-yogyakarta--tahun-20-13912.pdf
