@@ -91,7 +91,7 @@ Promise.all([fetch("/api/stats").then(r => r.json()), fetch("/api/cities").then(
   const rows = [...s.audit].sort((a, b) => a.accuracy - b.accuracy);
   document.getElementById("tbody").innerHTML = rows.map(a => {
     const us = a.mode === "page";
-    return `<tr${us ? ' style="background:var(--peach2)"' : ""}><td>${us ? "<b style='font-weight:500'>Which Bin</b> (Gemini 3.5 Flash-Lite)" : LABEL[a.model] || a.model}</td><td>${MODE[a.mode]}</td><td><b style="font-weight:500">${pct(a.accuracy)}</b></td><td>${pct(a.hazard)}</td><td>${pct(a.unsafe)}</td></tr>`;
+    return `<tr${us ? ' style="background:var(--peach2)"' : ""}><td>${us ? "<b style='font-weight:500'>Which Bin</b> (Gemini 3.5 Flash-Lite)" : LABEL[a.model] || a.model}</td><td>${MODE[a.mode]}</td><td style="min-width:180px"><div class="cellbar"><span><i style="width:${(a.accuracy * 100).toFixed(1)}%"${us ? ' class="us"' : ""}></i></span><b>${pct(a.accuracy)}</b></div></td><td>${pct(a.hazard)}</td><td>${pct(a.unsafe)}</td></tr>`;
   }).join("");
   const items = Object.entries(d.items).sort((a, b) => Object.keys(b[1].by_class).length - Object.keys(a[1].by_class).length);
   document.getElementById("matrix").innerHTML = items.map(([id, it]) => {

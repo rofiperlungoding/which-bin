@@ -53,6 +53,7 @@ const $ = id => document.getElementById(id);
 let data, filter = "all";
 const ORDER = ["vape", "aa_battery", "led_bulb", "charging_cable", "aerosol_empty"];
 fetch("/api/cities").then(r => r.json()).then(d => {
+  d.cities.sort((a, b) => (b.rules.length > 0) - (a.rules.length > 0) || b.checked - a.checked || a.name.localeCompare(b.name));
   data = d; render();
   const scanned = d.cities.filter(c => c.silent);
   const cols = [...ORDER, ...Object.keys(d.items).filter(i => !ORDER.includes(i))];
