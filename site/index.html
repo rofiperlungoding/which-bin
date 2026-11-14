@@ -20,14 +20,12 @@
   <p class="sub rv" style="--d:.16s">The same item goes in different bins in different cities. Which Bin makes assistants answer with your city's own published rules, and quotes them word for word.</p>
   <div class="cta rv" style="--d:.24s"><a class="btn" href="/demo">Check an item <i aria-hidden="true"></i></a><a class="btn ghost" href="/tour">Take the 2-minute tour</a></div>
 
-  <div class="stage rv" style="--d:.3s" aria-label="Example: one item, three cities, three different answers">
-   <div class="float a"><b>Disposable vape</b>Camden · Drop-off</div>
-   <div class="float b"><b>Juice carton</b>Shibuya · Drop-off</div>
-   <div class="float c"><b>AA battery</b>Toronto · Drop-off</div>
-   <div class="float d"><b>Greasy pizza box</b>New York · Compost</div>
-   <div class="search">
-    <div class="bar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span id="typed" aria-live="polite"></span><span class="caret" aria-hidden="true"></span></div>
-    <div class="results" id="hres"></div>
+  <div class="frame rv" style="--d:.3s" aria-label="Example: one item, three cities, three different answers">
+   <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>whichbin.rofihosted.space/demo</span></div>
+   <div class="fbody" id="fbody">
+    <div class="fq"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><b id="fitem">greasy pizza box</b><span>in 3 cities</span></div>
+    <div class="fverdict">⚡ 3 different answers for the same item</div>
+    <div class="fcards" id="fcards"><div class="mini"><div class="mtop"><span class="mg organics" aria-hidden="true">🌱</span><span>New York City</span></div><div class="mbin">Compost</div><q>Greasy uncoated paper plates and pizza boxes</q><div class="mok">✓ nyc.gov</div></div><div class="mini"><div class="mtop"><span class="mg recycle" aria-hidden="true">♻</span><span>Saint Paul</span></div><div class="mbin">Recycling</div><q>Delivery pizza boxes</q><div class="mok">✓ stpaul.gov</div></div><div class="mini"><div class="mtop"><span class="mg trash" aria-hidden="true">🗑</span><span>Philadelphia</span></div><div class="mbin">Garbage</div><q>Greasy or food-soiled paper and cardboard</q><div class="mok">✓ phila.gov</div></div></div>
    </div>
   </div>
 
@@ -39,17 +37,18 @@
  </div>
 </div>
 
+<p class="label">Rules quoted word for word from official city pages in</p>
 <div class="marquee" aria-label="Cities covered"><div class="track" id="mq"></div></div>
-<p class="label">Rules quoted from official city and council pages on three continents</p>
+
 
 <section>
  <div class="wrap">
   <h2 class="center rv">Start where you are</h2>
   <p class="sub rv">One rules layer, three ways to use it.</p>
   <div class="grid3">
-   <div class="card warm rv"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></div><h3>I'm holding something and don't know where it goes</h3><p>Type the item or take a photo. Get the bin and the exact sentence from your city's page.</p><div class="foot"><a class="btn ghost" href="/demo">Open the checker</a></div></div>
-   <div class="card warm rv" style="--d:.1s"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6"/></svg></div><h3>I build an AI assistant</h3><p>Add one tool, <code>which_bin(item, city)</code>, through MCP or plain HTTP. Your assistant stops guessing.</p><div class="foot"><a class="btn ghost" href="/developers">Connect it</a></div></div>
-   <div class="card warm rv" style="--d:.2s"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M2 10l10-6 10 6"/></svg></div><h3>I run a city's waste program</h3><p>See which common items your official page never mentions, so residents and AI stop guessing.</p><div class="foot"><a class="btn ghost" href="/cities#gaps">See the gaps</a></div></div>
+   <div class="card warm rv"><div class="illo" aria-hidden="true"><div class="ii"><span>disposable vape</span><em>Camden</em></div><div class="io"><span class="tag special">Drop-off</span>"Vapes … become extremely flammable when they are crushed."</div></div><h3>I'm holding something and don't know where it goes</h3><p>Type the item or take a photo. Get the bin and the exact sentence from your city's page.</p><div class="foot"><a class="btn ghost" href="/demo">Open the checker</a></div></div>
+   <div class="card warm rv" style="--d:.1s"><div class="illo code" aria-hidden="true"><span class="k">which_bin</span>("LED bulb", "nyc")<br><span class="c">→ trash · "Dispose of light bulbs … with your trash."</span></div><h3>I build an AI assistant</h3><p>Add one tool, <code>which_bin(item, city)</code>, through MCP or plain HTTP. Your assistant stops guessing.</p><div class="foot"><a class="btn ghost" href="/developers">Connect it</a></div></div>
+   <div class="card warm rv" style="--d:.2s"><div class="illo" aria-hidden="true"><div class="gl"><span>Vapes</span><i style="--w:47%"></i></div><div class="gl"><span>LED bulbs</span><i style="--w:60%"></i></div><div class="gl"><span>Cables</span><i style="--w:47%"></i></div><small>Share of resident guides with no rule</small></div><h3>I run a city's waste program</h3><p>See which common items your official page never mentions, so residents and AI stop guessing.</p><div class="foot"><a class="btn ghost" href="/cities#gaps">See the gaps</a></div></div>
   </div>
  </div>
 </section>
@@ -174,25 +173,26 @@ curl "https://whichbin.rofihosted.space/api/which-bin?item=disposable+vape&amp;c
 <footer></footer>
 <script src="/main.js"></script>
 <script>
-// hero: type an item, then show three cities that disagree (real rows from the dataset)
-const HERO = [
- ["greasy pizza box", [["Toronto", "organics"], ["Saint Paul", "recycle"], ["Philadelphia", "trash"]]],
- ["plastic shopping bag", [["Berlin", "recycle"], ["New York City", "trash"], ["San Francisco", "special"]]],
- ["LED light bulb", [["New York City", "trash"], ["Berlin", "special"], ["Shibuya", "trash"]]],
- ["styrofoam takeaway box", [["Toronto", "recycle"], ["Camden", "trash"], ["Vancouver", "special"]]],
-];
-const typed = document.getElementById("typed"), hres = document.getElementById("hres");
-const wait = ms => new Promise(r => setTimeout(r, ms));
-(async function loop(k = 0) {
-  const [item, rows] = HERO[k % HERO.length];
-  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (still) typed.textContent = item; else for (let i = 1; i <= item.length; i++) { typed.textContent = item.slice(0, i); await wait(55); }
-  hres.innerHTML = rows.map(([c, k]) => `<div class="res"><span>${c}</span><span class="tag ${k}">${TAG[k]}</span></div>`).join("");
-  for (const r of hres.children) { await wait(260); r.classList.add("in"); }
-  await wait(still ? 6000 : 2600);
-  if (!still) for (let i = item.length; i >= 0; i--) { typed.textContent = item.slice(0, i); await wait(22); }
-  hres.innerHTML = ""; loop(k + 1);
-})();
+// hero frame: rotate real comparisons from the dataset (first one is in the HTML, so it is never empty)
+const HERO = [["pizza_box_greasy", ["nyc", "saint_paul", "philadelphia"]], ["plastic_bag", ["berlin", "nyc", "san_francisco"]],
+              ["led_bulb", ["nyc", "berlin", "toronto"]], ["eps_takeaway", ["toronto", "camden", "vancouver"]]];
+const G = { recycle: "♻", organics: "🌱", trash: "🗑", special: "⚠" };
+const heroFrame = d => {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const by = Object.fromEntries(d.cities.map(c => [c.id, c])), body = document.getElementById("fbody");
+  let k = 0;
+  setInterval(() => {
+    k = (k + 1) % HERO.length;
+    const [item, ids] = HERO[k], rules = ids.map(c => by[c]?.rules.find(r => r.item === item));
+    if (rules.some(r => !r)) return;
+    body.classList.add("out");
+    setTimeout(() => {
+      document.getElementById("fitem").textContent = d.items[item].name;
+      document.getElementById("fcards").innerHTML = rules.map((r, j) => `<div class="mini"><div class="mtop"><span class="mg ${r.class}" aria-hidden="true">${G[r.class]}</span><span>${esc(by[ids[j]].name)}</span></div><div class="mbin">${TAG[r.class]}</div><q>${esc(r.quote)}</q><div class="mok">✓ ${esc(new URL(r.url).hostname.replace(/^www\./, ""))}</div></div>`).join("");
+      body.classList.remove("out");
+    }, 350);
+  }, 4200);
+};
 
 // how-it-works card follows the active step
 const STEP = [
@@ -221,7 +221,8 @@ Promise.all([fetch("/api/stats").then(r => r.json()), fetch("/api/cities").then(
   document.getElementById("ceilnote").textContent = `Dashed line: ${ceil}%, the most any answer that ignores location can score on these rules`;
   grow(bars);
   // marquee
-  const chips = d.cities.filter(c => c.rules.length).map(c => `<span>${esc(c.name)} <small>${esc(c.country)}</small></span>`).join("");
+  heroFrame(d);
+  const chips = d.cities.filter(c => c.rules.length).map(c => `<span>${esc(c.name)}</span>`).join("");
   document.getElementById("mq").innerHTML = chips + chips.replace(/<span>/g, '<span aria-hidden="true">');
   // carousel of real rules
   const PICK = [["nyc", "pizza_box_greasy"], ["philadelphia", "pizza_box_greasy"], ["camden", "vape"], ["berlin", "led_bulb"], ["nyc", "led_bulb"], ["toronto", "eps_takeaway"], ["camden", "eps_takeaway"], ["shibuya", "carton"]];
