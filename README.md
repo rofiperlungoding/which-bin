@@ -2,6 +2,8 @@
 
 The same item goes in different bins in different cities. A greasy pizza box is compost in New York and garbage elsewhere; a disposable vape is hazardous drop-off in one London borough and can end up in a garbage bin in other cities. Generic "is this recyclable?" answers are wrong for a large share of real questions, and the worst errors (batteries, vapes, bulbs in normal bins) start fires in collection trucks and sorting plants.
 
+Live: https://whichbin.rofihosted.space (demo at /demo)
+
 This repo is an open benchmark and a small reference system that answers **item + city → bin**, using the city's own published rules and quoting them.
 
 ## Results (gemini-3.5-flash-lite)
