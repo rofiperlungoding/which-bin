@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Model Audit · Which Bin</title>
+<meta name="description" content="How well AI models answer local recycling questions, scored against official city rules, and how the benchmark was built.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♻</text></svg>">
+</head>
+<body>
+<header class="top"></header>
+<div class="phero">
+ <div class="wrap">
+  <span class="eyebrow rv">Research</span>
+  <h1 class="rv" style="--d:.06s">The model audit</h1>
+  <p class="sub rv" style="--d:.12s">We asked AI models where everyday items go, city by city, and checked every answer against what the city publishes.</p>
+  <div class="kv">
+   <div class="rv"><strong data-count="25" id="k1">25</strong><span>cities on 3 continents</span></div>
+   <div class="rv" style="--d:.08s"><strong data-count="300" id="k2">300</strong><span>rules, each with a verbatim quote</span></div>
+   <div class="rv" style="--d:.16s"><strong id="k3">17/20</strong><span>items where cities disagree</span></div>
+   <div class="rv" style="--d:.24s"><strong data-count="78" data-suffix="%" id="k4">78%</strong><span>ceiling for location-blind answers</span></div>
+  </div>
+ </div>
+</div>
+
+<section style="padding-top:48px">
+ <div class="wrap">
+  <h2 class="center rv">Results</h2>
+  <p class="sub rv">Scored on the <span id="hand">94</span> hand-checked rules (8 cities). The 206 auto-drafted rules came from the same pages our system reads, so we don't score our system on them.</p>
+  <div class="tablewrap rv" style="margin-top:36px">
+   <table>
+    <thead><tr><th scope="col">System</th><th scope="col">Input</th><th scope="col">Accuracy</th><th scope="col">Hazard items</th><th scope="col">Drop-off items put in a normal bin</th></tr></thead>
+    <tbody id="tbody"><tr><td colspan="5">Loading…</td></tr></tbody>
+   </table>
+  </div>
+  <p class="note rv">Hazard items: vapes, AA batteries, LED bulbs. Only about 20 rules are drop-off-only, so the last column is a rough figure. Model rows ask about all 20 items in one request per city; Which Bin asks about one item at a time. Gemini 3.7 and 3.8 Flash timed out on our free quota; we will add them when they finish.</p>
+ </div>
+</section>
+
+<section style="padding-top:0">
+ <div class="wrap">
+  <h2 class="center rv">Where cities disagree</h2>
+  <p class="sub rv">Each bar shows how the cities that publish a rule for the item split between bins. Hover a segment to see which cities.</p>
+  <div class="chart rv" style="max-width:900px">
+   <div class="legend"><span><i class="k-recycle"></i>Recycling</span><span><i class="k-organics"></i>Compost</span><span><i class="k-trash"></i>Garbage</span><span><i class="k-special"></i>Drop-off</span></div>
+   <div class="matrix" id="matrix"></div>
+  </div>
+ </div>
+</section>
+
+<section id="method" style="padding-top:0">
+ <div class="wrap prose">
+  <span class="eyebrow rv">Method</span>
+  <h2 class="rv" style="margin-top:0">How the benchmark was built</h2>
+  <div class="timeline">
+   <div class="rv"><b>1. Pick 20 items people actually ask about</b><p>Everyday packaging plus three hazard items: vapes, AA batteries and LED bulbs.</p></div>
+   <div class="rv"><b>2. Hand-check 8 cities</b><p>Toronto, New York City, Vancouver, Shibuya, Berlin, Camden, San Francisco and Phoenix. Each rule records the bin, the city's own stream name, a verbatim quote and the URL.</p></div>
+   <div class="rv"><b>3. Draft 17 more cities with a model, then filter hard</b><p>A rule is kept only if its quote appears word for word on the page. A quote reused for four or more items is a category line, not an item rule, so it's dropped.</p></div>
+   <div class="rv"><b>4. Spot-check</b><p>Of 50 random auto-drafted rules, 41 were correct, 4 ambiguous and 5 wrong. The 5 wrong rules were removed.</p></div>
+   <div class="rv"><b>5. Score</b><p>Accuracy, accuracy on hazard items, and the share of drop-off-only items sent to a normal bin. The location-blind ceiling gives every city the most common answer for each item.</p></div>
+  </div>
+  <h2 class="rv">Limits</h2>
+  <ul class="rv">
+   <li>14 of 31 official pages couldn't be fetched without a browser (blocked requests, JavaScript widgets, moved PDFs).</li>
+   <li>Rules change. Quotes reflect pages collected in November 2026.</li>
+   <li>Official guidance we found for Indonesian cities is category-level only, so they aren't scored yet.</li>
+  </ul>
+  <h2 class="rv">Reproduce it</h2>
+  <pre class="rv">python bench.py stats data/rules_auto.csv
+python fetch.py
+GW_URL=... GW_KEY=... python baseline.py page
+GW_URL=... GW_KEY=... python audit.py gemini/gemini-3.6-flash</pre>
+  <p class="rv"><a class="link" href="https://github.com/rofiperlungoding/which-bin">Code and data on GitHub</a></p>
+ </div>
+</section>
+
+<footer></footer>
+<script src="/main.js"></script>
+<script>
+const LABEL = { "gemini-3.5-flash-lite": "Gemini 3.5 Flash-Lite", "gemini-3.1-flash-lite-preview": "Gemini 3.1 Flash-Lite", "gemini-3-flash-preview": "Gemini 3 Flash", "gemini-3.6-flash": "Gemini 3.6 Flash" };
+const MODE = { blind: "Item only", city: "Item + city name", page: "Item + city's official pages" };
+const KEYS = ["recycle", "organics", "trash", "special"];
+Promise.all([fetch("/api/stats").then(r => r.json()), fetch("/api/cities").then(r => r.json())]).then(([s, d]) => {
+  const set = (id, v) => { const el = document.getElementById(id); el.dataset.count = v; if (el.closest(".rv.in")) el.textContent = v + (el.dataset.suffix || ""); };
+  set("k1", s.cities); set("k2", s.rules); set("k4", Math.round(s.blind_ceiling * 100));
+  document.getElementById("k3").textContent = `${s.items_disagree}/${s.items}`;
+  document.getElementById("hand").textContent = s.checked_rules;
+  const rows = [...s.audit].sort((a, b) => a.accuracy - b.accuracy);
+  document.getElementById("tbody").innerHTML = rows.map(a => {
+    const us = a.mode === "page";
+    return `<tr${us ? ' style="background:var(--peach2)"' : ""}><td>${us ? "<b style='font-weight:500'>Which Bin</b> (Gemini 3.5 Flash-Lite)" : LABEL[a.model] || a.model}</td><td>${MODE[a.mode]}</td><td><b style="font-weight:500">${pct(a.accuracy)}</b></td><td>${pct(a.hazard)}</td><td>${pct(a.unsafe)}</td></tr>`;
+  }).join("");
+  const items = Object.entries(d.items).sort((a, b) => Object.keys(b[1].by_class).length - Object.keys(a[1].by_class).length);
+  document.getElementById("matrix").innerHTML = items.map(([id, it]) => {
+    const n = KEYS.reduce((t, k) => t + (it.by_class[k]?.length || 0), 0);
+    const seg = KEYS.filter(k => it.by_class[k]).map(k => `<i class="k-${k}" style="flex-grow:${it.by_class[k].length}" title="${TAG[k]} (${it.by_class[k].length}): ${it.by_class[k].join(", ")}"></i>`).join("");
+    return `<div class="mrow"><span>${esc(it.name)}${it.hazard ? ' <span class="badge">hazard</span>' : ""} <small style="color:var(--muted)">${n} cities</small></span><div class="stack" role="img" aria-label="${esc(it.name)}: ${KEYS.filter(k => it.by_class[k]).map(k => TAG[k] + " " + it.by_class[k].length).join(", ")}">${seg}</div></div>`;
+  }).join("");
+}).catch(() => {});
+</script>
+</body>
+</html>

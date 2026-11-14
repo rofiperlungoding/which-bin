@@ -22,10 +22,10 @@ In the full corpus (300 rows, 25 cities), 17 of 20 items get different answers i
 
 ## Guidance gaps
 
-This applies to the 17 cities whose main "what goes where" page was read for all 20 items:
+This applies to the 15 cities whose main resident "what goes where" page was read for all 20 items (Vienna and Yogyakarta are excluded because their sources are a quiz sheet and an office guideline):
 
-- 9 of 17 pages never mention vapes (verified by text search of each page).
-- 11 of 17 give no rule for LED bulbs.
+- 7 of 15 resident guides never mention vapes (verified by text search of each page).
+- 9 of 15 give no rule for LED bulbs.
 
 Assistants fill those gaps with guesses. `gaps.py` gives each city a list of what to add.
 

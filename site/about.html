@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About · Which Bin</title>
+<meta name="description" content="Why Which Bin exists, the principles behind it, and what comes next.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♻</text></svg>">
+</head>
+<body>
+<header class="top"></header>
+<div class="phero">
+ <div class="wrap">
+  <span class="eyebrow rv">About</span>
+  <h1 class="rv" style="--d:.06s">Recycling is local.<br>Advice should be too.</h1>
+  <p class="sub rv" style="--d:.12s">Which Bin started from one question: if everyone now asks AI where things go, whose rules is it answering with?</p>
+ </div>
+</div>
+
+<section style="padding-top:40px">
+ <div class="wrap split">
+  <div class="rv">
+   <span class="eyebrow">The problem</span>
+   <h2>The same pizza box, three answers</h2>
+   <p style="color:var(--ink2)">In New York a greasy pizza box goes in the compost. In Saint Paul it goes in recycling. In Philadelphia it goes in the garbage. Each city is right for its own trucks, plants and contracts.</p>
+   <p style="color:var(--ink2)">General advice, from a search snippet or a chatbot, can't be right for all three. For batteries and vapes, a wrong answer can start a fire.</p>
+  </div>
+  <div class="demo-card rv" style="--d:.1s;min-height:0">
+   <div class="answer" style="display:grid;gap:10px">
+    <div class="res in"><span>New York City</span><span class="tag organics">Compost</span></div>
+    <div class="res in"><span>Saint Paul</span><span class="tag recycle">Recycling</span></div>
+    <div class="res in"><span>Philadelphia</span><span class="tag trash">Garbage</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section style="padding-top:0">
+ <div class="wrap">
+  <h2 class="center rv">What we believe</h2>
+  <div class="grid3">
+   <div class="card rv"><div class="icon">1</div><h3>The city is the authority</h3><p>We only use official city and council pages. No blogs, no aggregators, no model memory.</p></div>
+   <div class="card rv" style="--d:.1s"><div class="icon">2</div><h3>Show the words, or say you don't know</h3><p>Every answer quotes the page word for word. If there's no matching sentence, we say it's a guess.</p></div>
+   <div class="card rv" style="--d:.2s"><div class="icon">3</div><h3>Open by default</h3><p>The dataset, benchmark, server and site are all public, so anyone can check, fix or extend them.</p></div>
+  </div>
+ </div>
+</section>
+
+<section style="padding-top:0">
+ <div class="wrap prose">
+  <span class="eyebrow rv">Roadmap</span>
+  <h2 class="rv" style="margin-top:0">What's next</h2>
+  <div class="timeline">
+   <div class="rv"><b>Done · November 2026</b><p>300 rules across 25 cities, model audit, checker with photo input, HTTP API and MCP server, guidance gap report.</p></div>
+   <div class="rv"><b>Next · More cities, including Indonesia</b><p>Indonesian guidance is mostly category-level today. We want to map city rules in Jakarta, Bali and Yogyakarta as they're published.</p></div>
+   <div class="rv"><b>Next · Change alerts</b><p>Re-fetch official pages on a schedule and flag rules whose wording changed.</p></div>
+   <div class="rv"><b>Next · Reports for cities</b><p>A one-page gap report per city: the common items residents ask about that its guide never mentions.</p></div>
+  </div>
+ </div>
+</section>
+
+<section style="padding-top:0">
+ <div class="wrap">
+  <div class="band rv">
+   <span class="eyebrow">Get involved</span>
+   <h2>Know your city's rules?</h2>
+   <p class="sub">Add them with a quote and a link, or tell us where the official page lives.</p>
+   <div class="cta" style="margin-top:28px"><a class="btn light" href="https://github.com/rofiperlungoding/which-bin/issues">Open an issue <i aria-hidden="true"></i></a><a class="btn ghost" style="background:transparent;color:#fff;border-color:#4a4136" href="/developers#mcp">Developer docs</a></div>
+  </div>
+  <p class="label" style="margin-top:28px">Built for Arbiter Hacks V1 · Theme: Rethinking Waste</p>
+ </div>
+</section>
+
+<footer></footer>
+<script src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Developers · Which Bin</title>
+<meta name="description" content="Ground your assistant's recycling answers in official city rules with the Which Bin HTTP API or MCP server.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♻</text></svg>">
+<style>.ep{display:flex;gap:10px;align-items:center;font-family:ui-monospace,Consolas,monospace;font-size:14px}.ep b{font-size:11px;border-radius:6px;padding:2px 7px;background:#d7ebc9;font-weight:600}.ep b.post{background:var(--peach)}
+.copy{position:relative}.copy button{position:absolute;top:10px;right:10px;font:inherit;font-size:12px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 10px;cursor:pointer;transition:background .2s}.copy button:hover{background:var(--peach2)}
+#try pre{min-height:120px;transition:opacity .3s}</style>
+</head>
+<body>
+<header class="top"></header>
+<div class="phero">
+ <div class="wrap">
+  <span class="eyebrow rv">Developers</span>
+  <h1 class="rv" style="--d:.06s">Stop your assistant guessing</h1>
+  <p class="sub rv" style="--d:.12s">One tool call returns the bin, the city's own sentence and its source. Use it over plain HTTP or as an MCP server.</p>
+  <div class="cta rv" style="--d:.18s;margin-top:28px"><a class="btn" href="#try">Try the API <i aria-hidden="true"></i></a><a class="btn ghost" href="#mcp">Set up MCP</a></div>
+ </div>
+</div>
+
+<section style="padding-top:40px" id="try">
+ <div class="wrap grid2" style="margin-top:0;align-items:start">
+  <div class="card rv">
+   <h3>Try it live</h3>
+   <p>Calls the public endpoint below.</p>
+   <form id="tf" style="display:grid;gap:10px;margin-top:8px">
+    <input class="input" id="ti" value="disposable vape" aria-label="Item" maxlength="100">
+    <select class="input" id="tc" aria-label="City"><option value="camden">camden</option></select>
+    <button class="btn" style="justify-self:start">Send request <i aria-hidden="true"></i></button>
+   </form>
+  </div>
+  <div class="rv copy" style="--d:.1s"><div class="ep" style="margin-bottom:10px"><b>GET</b><span id="turl">/api/which-bin?item=disposable+vape&amp;city=camden</span></div><pre id="tout" style="background:var(--dark);color:#f6e7d3;border-radius:16px;padding:18px;white-space:pre-wrap;word-break:break-word;margin:0">{ "press": "Send request" }</pre></div>
+ </div>
+</section>
+
+<section style="padding-top:0">
+ <div class="wrap prose">
+  <h2 class="rv" style="margin-top:0">Endpoints</h2>
+  <div class="tablewrap rv"><table>
+   <thead><tr><th scope="col">Endpoint</th><th scope="col">Returns</th></tr></thead>
+   <tbody>
+    <tr><td><div class="ep"><b>GET</b>/api/which-bin?item=&amp;city=</div></td><td><code>class</code>, <code>bin</code>, <code>quote</code>, <code>verified</code>, <code>source</code>. <code>class</code> is <code>null</code> when the page is silent.</td></tr>
+    <tr><td><div class="ep"><b>GET</b>/api/cities</div></td><td>Every city with its sources, rules (quote and URL) and gaps, plus the item list.</td></tr>
+    <tr><td><div class="ep"><b>GET</b>/api/stats</div></td><td>Benchmark headline numbers and the model audit.</td></tr>
+    <tr><td><div class="ep"><b class="post">POST</b>/api/identify</div></td><td>Body: an image data URL. Returns <code>{"item": "…"}</code>.</td></tr>
+   </tbody>
+  </table></div>
+  <p class="rv">Classes: <code>recycle</code>, <code>organics</code>, <code>trash</code>, <code>special</code> (drop-off, take-back, deposit or hazardous collection). Errors: <code>400</code> bad input, <code>404</code> city not on file, <code>429</code> busy, <code>502</code> model failure.</p>
+  <p class="rv">The public demo shares one small free quota (about 20 model calls a minute in total). For real traffic, self-host: the server is one file of standard-library Python.</p>
+
+  <h2 class="rv" id="mcp">MCP server</h2>
+  <p class="rv">Gives Claude, or any MCP client, two tools: <code>which_bin(item, city)</code> and <code>list_cities()</code>.</p>
+  <div class="copy rv"><pre>git clone https://github.com/rofiperlungoding/which-bin && cd which-bin
+python fetch.py
+claude mcp add which-bin -e GW_URL=... -e GW_KEY=... -- python mcp_server.py</pre><button type="button" data-copy>Copy</button></div>
+  <p class="rv"><code>GW_URL</code> is any OpenAI-compatible <code>/chat/completions</code> endpoint and <code>GW_KEY</code> its key.</p>
+
+  <h2 class="rv">Self-host the site and API</h2>
+  <div class="copy rv"><pre>GW_URL=... GW_KEY=... PORT=8000 python app.py</pre><button type="button" data-copy>Copy</button></div>
+
+  <h2 class="rv">Add a city</h2>
+  <p class="rv">Add rows to <code>data/rules.csv</code>: city, country, item, class, local stream name, a verbatim quote and the official URL. <code>python bench.py stats</code> checks the class, duplicates and the URL. Then <code>python fetch.py</code> saves the page for the checker.</p>
+ </div>
+</section>
+
+<footer></footer>
+<script src="/main.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+fetch("/api/cities").then(r => r.json()).then(d => {
+  $("tc").innerHTML = d.cities.filter(c => c.live && c.rules.length).map(c => `<option value="${c.id}"${c.id === "camden" ? " selected" : ""}>${c.id}</option>`).join("");
+});
+const url = () => `/api/which-bin?item=${encodeURIComponent($("ti").value.trim())}&city=${$("tc").value}`;
+["input", "change"].forEach(t => $("tf").addEventListener(t, () => $("turl").textContent = url()));
+$("tf").onsubmit = async e => {
+  e.preventDefault();
+  $("tout").style.opacity = .4; $("tout").textContent = "…";
+  try { const r = await fetch(url()); $("tout").textContent = `HTTP ${r.status}\n` + JSON.stringify(await r.json(), null, 2); }
+  catch { $("tout").textContent = "Request failed"; }
+  $("tout").style.opacity = 1;
+};
+document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
+  try { await navigator.clipboard.writeText(b.previousElementSibling.textContent); b.textContent = "Copied ✓"; } catch { b.textContent = "Select and copy"; }
+  setTimeout(() => b.textContent = "Copy", 1600);
+});
+</script>
+</body>
+</html>

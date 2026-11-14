@@ -1,20 +1,34 @@
-"""Demo: item + city -> bin, with the city's own rule quoted and checked verbatim against the official page.
+"""Website + JSON API: item + city -> bin, with the city's own rule quoted and checked verbatim against the official page.
 
-  GW_URL=... GW_KEY=... python app.py      then open http://localhost:8000 (landing page) or /demo
+  GW_URL=... GW_KEY=... python app.py      then open http://localhost:8000
+
+  GET  /api/which-bin?item=disposable+vape&city=camden
+  GET  /api/cities        cities, sources, rules and gaps
+  GET  /api/stats         benchmark headline numbers and the model audit, computed from data/ and preds/
+  POST /api/identify      body: image data URL -> {"item": "..."}
+Pages are the static files in site/ (/about serves site/about.html).
 """
-import html, json, os, re, threading, time, urllib.parse, urllib.request
+import csv, json, os, re, threading, time, urllib.parse, urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from baseline import GW, TASK
-from bench import CLASSES
+from baseline import GW, NAMES, TASK
+from bench import CLASSES, HAZARD, RULES, blind_best, by_item, load, score
 from extract import norm
 
-CACHE = Path(__file__).with_name("cache")
-SITE = Path(__file__).with_name("site") / "index.html"
+ROOT = Path(__file__).parent
+CACHE, SITE = ROOT / "cache", ROOT / "site"
 MODEL = os.environ.get("APP_MODEL", "gemini/gemini-3.5-flash-lite")
 BIN = {"recycle": "Recycling bin", "organics": "Food / green bin", "trash": "Garbage bin",
        "special": "Not a household bin: drop-off, take-back or hazardous collection"}
+NICE = {"nyc": "New York City", "city_of_london": "City of London", "st_louis": "St. Louis",
+        "dumfries_galloway": "Dumfries & Galloway", "saint_paul": "Saint Paul"}
+COUNTRY = {"CA": "Canada", "US": "United States", "JP": "Japan", "DE": "Germany", "GB": "United Kingdom",
+           "AU": "Australia", "AT": "Austria", "ID": "Indonesia"}
+TYPES = {".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript",
+         ".svg": "image/svg+xml", ".png": "image/png", ".ico": "image/x-icon"}
 
+# sources that are not a resident guide (a quiz sheet, an office guideline): rules count, gaps don't
+NOT_RESIDENT = {"vienna", "yogyakarta"}
 
 _calls, _lock = [], threading.Lock()
 
@@ -31,101 +45,129 @@ def budget(per_min=int(os.environ.get("CALLS_PER_MIN", "20"))):
         return True
 
 
+def chat(content, max_tokens):
+    if not budget():
+        raise RuntimeError("busy")
+    body = json.dumps({"model": MODEL, "temperature": 0, "max_tokens": max_tokens,
+                       "messages": [{"role": "user", "content": content}]}).encode()
+    req = urllib.request.Request(GW, body, {"Authorization": f"Bearer {os.environ['GW_KEY']}",
+                                            "Content-Type": "application/json", "User-Agent": "arbiter-bench/0.1"})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        return json.load(r)["choices"][0]["message"]["content"] or ""
+
+
 def answer(item, city):
     page = CACHE / f"{city}.txt"
     if not page.exists():
         return None
     text = page.read_text(encoding="utf-8")[:60000]
-    if not budget():
-        raise RuntimeError("busy")
-    prompt = (TASK + f"Item: {item}\nOfficial waste pages published by this city:\n{text}\n"
-              'Return JSON only: {"class": "...", "quote": "<one sentence copied exactly from the pages that names this item or its category, max 30 words>"}')
-    body = json.dumps({"model": MODEL, "temperature": 0, "max_tokens": 300,
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
-    req = urllib.request.Request(GW, body, {"Authorization": f"Bearer {os.environ['GW_KEY']}",
-                                            "Content-Type": "application/json", "User-Agent": "arbiter-bench/0.1"})
-    with urllib.request.urlopen(req, timeout=120) as r:
-        txt = json.load(r)["choices"][0]["message"]["content"]
-    m = re.search(r"\{.*\}", txt or "", re.S)
+    txt = chat(TASK + f"Item: {item}\nOfficial waste pages published by this city:\n{text}\n"
+               'Return JSON only: {"class": "...", "quote": "<one sentence copied exactly from the pages that names '
+               'this item or its category, max 30 words>"}', 300)
+    m = re.search(r"\{.*\}", txt, re.S)
     a = json.loads(m.group(0)) if m else {}
     if a.get("class") not in CLASSES:
-        return {"class": None, "quote": "", "verified": False}
+        return {"class": None, "bin": None, "quote": "", "verified": False, "source": None}
     q = str(a.get("quote", ""))
     # a quote not found on the page is not shown as a rule
-    return {"class": a["class"], "quote": q, "verified": bool(q) and norm(q) in norm(text)}
+    src = next((s.split(None, 1)[0] for s in text.split("SOURCE ")[1:] if q and norm(q) in norm(s)), None)
+    return {"class": a["class"], "bin": BIN[a["class"]], "quote": q if src else "", "verified": bool(src), "source": src}
 
 
 def identify(data_url):
     """Photo -> short item name (vision model). Only names the item; the bin still comes from the city's page."""
-    if not budget():
-        raise RuntimeError("busy")
-    body = json.dumps({"model": MODEL, "temperature": 0, "max_tokens": 30, "messages": [{"role": "user", "content": [
-        {"type": "text", "text": "Name the single household item to throw away in this photo, in at most 6 words "
-         "(material matters, e.g. 'greasy pizza box', 'disposable vape'). Reply with the name only."},
-        {"type": "image_url", "image_url": {"url": data_url}}]}]}).encode()
-    req = urllib.request.Request(GW, body, {"Authorization": f"Bearer {os.environ['GW_KEY']}",
-                                            "Content-Type": "application/json", "User-Agent": "arbiter-bench/0.1"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return (json.load(r)["choices"][0]["message"]["content"] or "").strip().strip(".")[:100]
+    return chat([{"type": "text", "text": "Name the single household item to throw away in this photo, in at most 6 words "
+                  "(material matters, e.g. 'greasy pizza box', 'disposable vape'). Reply with the name only."},
+                 {"type": "image_url", "image_url": {"url": data_url}}], 30).strip().strip(".")[:100]
 
 
-def page(item="", city="", result=""):
-    cities = sorted(p.stem for p in CACHE.glob("*.txt"))
-    opts = "".join(f'<option value="{c}"{" selected" if c == city else ""}>{c.replace("_", " ").title()}</option>' for c in cities)
-    return f"""<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Which bin?</title><style>body{{font:16px system-ui;max-width:36rem;margin:2rem auto;padding:0 16px}}
-input,select,button{{font:inherit;padding:.5rem;width:100%;margin:.25rem 0 1rem}}blockquote{{border-left:4px solid #888;margin:0;padding-left:1rem}}</style>
-<p><a href="/">← Which Bin</a></p><h1>Which bin?</h1><p>Answers follow your city's own published rules.</p>
-<form action="/demo"><label for="i">Item</label><input id="i" name="item" required value="{html.escape(item)}" placeholder="disposable vape">
-<label for="c">City</label><select id="c" name="city">{opts}</select><button>Check</button></form>
-<label for="f">Or take a photo of the item</label><input id="f" type="file" accept="image/*" capture="environment">
-<script>f.onchange=()=>{{const r=new FileReader();r.onload=async()=>{{i.value="Identifying...";
-const t=await fetch("/identify",{{method:"POST",body:r.result}});i.value=t.ok?await t.text():"";
-if(i.value)i.form.requestSubmit()}};r.readAsDataURL(f.files[0])}}</script>
-<div role="status">{result}</div></html>"""
+def build():
+    """Everything the site shows, computed once from data/ and preds/ so pages never drift from the benchmark."""
+    hand, auto = load(RULES), load(RULES.with_name("rules_auto.csv"))
+    gold = {**auto, **hand}
+    rows = []
+    for name in ("rules.csv", "rules_auto.csv", "sources.csv"):
+        with open(RULES.with_name(name), encoding="utf-8", newline="") as f:
+            rows += [dict(r, file=name) for r in csv.DictReader(f)]
+    cities = {}
+    for r in rows:
+        c = cities.setdefault(r["city"], {"id": r["city"], "name": NICE.get(r["city"], r["city"].replace("_", " ").title()),
+                                          "country": COUNTRY.get(r["country"], r["country"]), "sources": [], "rules": []})
+        if r["url"] not in c["sources"]:
+            c["sources"].append(r["url"])
+        if r["file"] != "sources.csv" and (r["city"], r["item"]) in gold and gold[(r["city"], r["item"])] == r["class"]:
+            c["rules"].append({"item": r["item"], "name": NAMES[r["item"]], "class": r["class"], "quote": r["quote"],
+                               "url": r["url"], "checked": r["file"] == "rules.csv"})
+    auto_cities = {c for c, _ in auto}
+    for c in cities.values():
+        c["live"] = (CACHE / f"{c['id']}.txt").exists()
+        c["checked"] = c["id"] not in auto_cities and bool(c["rules"])
+        have = {r["item"] for r in c["rules"]}
+        # gaps only mean something where the whole main page was read for every item
+        c["silent"] = sorted(i for i in NAMES if i not in have) if c["id"] in auto_cities - NOT_RESIDENT else None
+    acc, haz, unsafe, n = score(gold, blind_best(gold))
+    items = {i: {"name": NAMES[i], "hazard": i in HAZARD, "by_class": {k: sorted(c for c, v in cs.items() if v == k)
+             for k in CLASSES if k in cs.values()}} for i, cs in by_item(gold).items()}
+    audit = []
+    for f in sorted((ROOT / "preds" / "audit").glob("*.csv")) + [ROOT / "preds" / f"{MODEL.replace('/', '_')}__page__v1.csv"]:
+        with open(f, encoding="utf-8", newline="") as fh:
+            pred = {(r["city"], r["item"]): r["class"] for r in csv.DictReader(fh)}
+        a, h, u, _ = score(hand, pred)
+        model, mode = f.stem.split("__")[:2]
+        audit.append({"model": model.split("_", 1)[1], "mode": mode, "accuracy": a, "hazard": h, "unsafe": u})
+    stats = {"cities": len({c for c, _ in gold}), "rules": len(gold), "checked_rules": len(hand), "items": len(NAMES),
+             "items_disagree": sum(len(set(v.values())) > 1 for v in by_item(gold).values()),
+             "blind_ceiling": acc, "blind_unsafe": unsafe, "hand_blind_ceiling": score(hand, blind_best(hand))[0],
+             "audit": audit}
+    return sorted(cities.values(), key=lambda c: c["name"]), items, stats
+
+
+CITIES, ITEMS, STATS = build()
+assert STATS["items_disagree"] <= STATS["items"] and all(0 <= a["accuracy"] <= 1 for a in STATS["audit"])
 
 
 class H(BaseHTTPRequestHandler):
+    def send(self, code, body=b"", ctype="application/json"):
+        self.send_response(code)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Cache-Control", "no-cache")  # small site: always revalidate so redeploys show at once
+        self.end_headers()
+        self.wfile.write(body)
+
+    def json(self, obj, code=200):
+        self.send(code, json.dumps(obj).encode())
+
     def do_POST(self):
         n = int(self.headers.get("Content-Length", 0))
         data = self.rfile.read(n).decode() if 0 < n <= 8_000_000 else ""
-        if self.path != "/identify" or not re.match(r"data:image/(png|jpeg|webp|heic);base64,", data):
-            self.send_response(400); self.end_headers(); return
+        if self.path != "/api/identify" or not re.match(r"data:image/(png|jpeg|webp|heic);base64,", data):
+            return self.json({"error": "send an image data URL"}, 400)
         try:
-            name, code = identify(data).encode(), 200
-        except Exception:
-            name, code = b"", 502
-        self.send_response(code); self.send_header("Content-Type", "text/plain; charset=utf-8"); self.end_headers()
-        self.wfile.write(name)
+            self.json({"item": identify(data)})
+        except Exception as e:
+            self.json({"error": "busy" if str(e) == "busy" else "failed"}, 429 if str(e) == "busy" else 502)
 
     def do_GET(self):
         url = urllib.parse.urlparse(self.path)
-        if url.path == "/":
-            out = SITE.read_bytes()
-            self.send_response(200); self.send_header("Content-Type", "text/html; charset=utf-8"); self.end_headers()
-            self.wfile.write(out); return
-        if url.path != "/demo":
-            self.send_response(404); self.end_headers(); return
-        q = urllib.parse.parse_qs(url.query)
-        item, city = q.get("item", [""])[0][:100], q.get("city", [""])[0]
-        result = ""
-        if item and re.fullmatch(r"[a-z_]+", city):  # city names a cache file: no path tricks
+        q = {k: v[0] for k, v in urllib.parse.parse_qs(url.query).items()}
+        if url.path == "/api/cities":
+            return self.json({"cities": CITIES, "items": ITEMS})
+        if url.path == "/api/stats":
+            return self.json(STATS)
+        if url.path == "/api/which-bin":
+            item, city = q.get("item", "").strip()[:100], q.get("city", "")
+            if not item or not re.fullmatch(r"[a-z_]+", city):  # city names a cache file: no path tricks
+                return self.json({"error": "need item and a city id from /api/cities"}, 400)
             try:
                 a = answer(item, city)
             except Exception as e:
-                msg = "Too many people are asking right now. Try again in a minute." if str(e) == "busy" else "Lookup failed."
-                a, result = None, f"<p>{msg}</p>"
-            if a is None and not result:
-                result = "<p>No official page for this city yet.</p>"
-            elif a and a["class"] is None:
-                result = "<p>The city's pages do not say clearly. Check with your city.</p>"
-            elif a:
-                rule = (f'<blockquote>{html.escape(a["quote"])}</blockquote><p>Quote found on the official page.</p>'
-                        if a["verified"] else "<p>No exact rule found on the page: treat as a best guess.</p>")
-                result = f'<h2>{BIN[a["class"]]}</h2>{rule}'
-        out = page(item, city, result).encode()
-        self.send_response(200); self.send_header("Content-Type", "text/html; charset=utf-8"); self.end_headers()
-        self.wfile.write(out)
+                return self.json({"error": "busy" if str(e) == "busy" else "failed"}, 429 if str(e) == "busy" else 502)
+            return self.json(a if a else {"error": "no official page for this city yet"}, 200 if a else 404)
+        name = url.path.strip("/") or "index"
+        f = SITE / (name if "." in name else name + ".html")
+        if re.fullmatch(r"[a-z0-9_-]+(\.[a-z]+)?", name) and f.is_file() and f.suffix in TYPES:
+            return self.send(200, f.read_bytes(), TYPES[f.suffix])
+        self.send(404, (SITE / "404.html").read_bytes(), TYPES[".html"])
 
 
 if __name__ == "__main__":

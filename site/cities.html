@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cities · Which Bin</title>
+<meta name="description" content="Every city in the Which Bin dataset, its official sources, its rules, and the items its guidance never mentions.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♻</text></svg>">
+</head>
+<body>
+<header class="top"></header>
+<div class="phero">
+ <div class="wrap">
+  <span class="eyebrow rv">Dataset</span>
+  <h1 class="rv" style="--d:.06s">Cities and their rules</h1>
+  <p class="sub rv" style="--d:.12s">Every rule links to the official page it came from. Open a city to read its rules in its own words.</p>
+ </div>
+</div>
+<section style="padding-top:24px">
+ <div class="wrap">
+  <div class="toolbar rv">
+   <div class="seg" role="group" aria-label="Filter cities">
+    <button aria-pressed="true" data-f="all">All</button><button aria-pressed="false" data-f="checked">Hand-checked</button><button aria-pressed="false" data-f="live">In the checker</button><button aria-pressed="false" data-f="soon">Coming soon</button>
+   </div>
+   <input class="input" id="q" type="search" placeholder="Search cities or countries" aria-label="Search cities" style="max-width:280px;padding:10px 14px">
+  </div>
+  <div class="cgrid" id="grid"></div>
+ </div>
+</section>
+
+<section id="gaps" style="padding-top:0">
+ <div class="wrap">
+  <span class="eyebrow center rv" style="display:block">Guidance gaps</span>
+  <h2 class="center rv">What each city's page never mentions</h2>
+  <p class="sub rv">For cities whose main resident guide we read for all 20 items. A dash means the page gives no clear, quotable rule. Hazard items first.</p>
+  <div class="tablewrap rv" style="margin-top:36px"><table><thead id="ghead"></thead><tbody id="gbody"></tbody></table></div>
+  <p class="note rv">Vienna (quiz sheet) and Yogyakarta (office guideline) are excluded: their sources are not resident guides. Hand-checked cities are excluded because we collected only some items there.</p>
+ </div>
+</section>
+
+<dialog id="dlg" aria-labelledby="dtitle">
+ <div class="dhead"><div><div id="dsub" style="font-size:13px;color:var(--muted)"></div><h2 id="dtitle" style="font-size:26px;text-align:left"></h2></div><button class="close" aria-label="Close" onclick="dlg.close()">×</button></div>
+ <div class="dbody" id="dbody"></div>
+</dialog>
+
+<footer></footer>
+<script src="/main.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+let data, filter = "all";
+const ORDER = ["vape", "aa_battery", "led_bulb", "charging_cable", "aerosol_empty"];
+fetch("/api/cities").then(r => r.json()).then(d => {
+  data = d; render();
+  const scanned = d.cities.filter(c => c.silent);
+  const cols = [...ORDER, ...Object.keys(d.items).filter(i => !ORDER.includes(i))];
+  $("ghead").innerHTML = `<tr><th scope="col">City</th>${cols.map(i => `<th scope="col" style="white-space:nowrap">${esc(d.items[i].name.replace(/^(disposable|empty|clean|used|loose) /, ""))}</th>`).join("")}</tr>`;
+  $("gbody").innerHTML = scanned.map(c => `<tr><th scope="row" style="font-weight:500;color:var(--ink);white-space:nowrap">${esc(c.name)}</th>${cols.map(i => {
+    const r = c.rules.find(x => x.item === i);
+    return r ? `<td title="${esc(r.quote)}"><span class="tag ${r.class}">${TAG[r.class]}</span></td>` : `<td style="color:#b9542b" aria-label="no rule">—</td>`;
+  }).join("")}</tr>`).join("");
+  if (location.hash.length > 1 && location.hash !== "#gaps") open(location.hash.slice(1));
+});
+function render() {
+  const q = $("q").value.trim().toLowerCase();
+  const show = data.cities.filter(c => (filter === "all" || (filter === "checked" && c.checked) || (filter === "live" && c.live && c.rules.length) || (filter === "soon" && !c.rules.length))
+    && (c.name + " " + c.country).toLowerCase().includes(q));
+  $("grid").innerHTML = show.map((c, k) => {
+    const n = c.rules.length, w = n / 20 * 100;
+    return `<button class="card ccard rv in" style="animation:pop .45s var(--ease) ${Math.min(k, 12) * .03}s both" data-id="${c.id}">
+      <div class="row3"><span>${esc(c.country)}</span>${c.checked ? '<span class="badge on">Hand-checked</span>' : n ? '<span class="badge">Auto + verified</span>' : '<span class="badge">Coming soon</span>'}</div>
+      <h3>${esc(c.name)}</h3>
+      <div class="row3"><span>${n} of 20 items</span><span>${c.live && n ? "In the checker" : "Not in the checker yet"}</span></div>
+      <div class="meter"><i style="width:${w}%"></i></div></button>`;
+  }).join("") || '<p style="color:var(--ink2)">No cities match.</p>';
+  $("grid").querySelectorAll(".ccard").forEach(b => b.onclick = () => open(b.dataset.id));
+}
+function open(id) {
+  const c = data.cities.find(x => x.id === id); if (!c) return;
+  history.replaceState(null, "", "#" + id);
+  $("dsub").textContent = `${c.country} · ${c.rules.length} rules`;
+  $("dtitle").textContent = c.name;
+  $("dbody").innerHTML = (c.rules.length ? `<table><thead><tr><th scope="col">Item</th><th scope="col">Bin</th><th scope="col">The city's words</th></tr></thead><tbody>${c.rules.map(r =>
+      `<tr><td>${esc(r.name)}</td><td><span class="tag ${r.class}">${TAG[r.class]}</span></td><td>"${esc(r.quote)}" <a href="${esc(r.url)}" style="color:var(--muted);font-size:12px">source</a></td></tr>`).join("")}</tbody></table>`
+      : `<p style="color:var(--ink2)">We have this city's official page on file but haven't extracted rules yet.</p>`)
+    + (c.silent?.length ? `<h3 style="margin:24px 0 8px">Not mentioned on the main page</h3><p style="color:var(--ink2);font-size:14px">${c.silent.map(i => esc(data.items[i].name)).join(", ")}</p>` : "")
+    + `<h3 style="margin:24px 0 8px">Sources</h3><ul style="padding-left:18px;font-size:14px">${c.sources.map(u => `<li><a href="${esc(u)}" style="word-break:break-all">${esc(u)}</a></li>`).join("")}</ul>`
+    + (c.live ? `<p style="margin-top:18px"><a class="btn" href="/demo?city=${c.id}">Check an item in ${esc(c.name)} <i aria-hidden="true"></i></a></p>` : "");
+  $("dlg").showModal();
+}
+$("dlg").addEventListener("close", () => history.replaceState(null, "", location.pathname));
+$("dlg").addEventListener("click", e => e.target === $("dlg") && $("dlg").close());
+document.querySelectorAll(".seg button").forEach(b => b.onclick = () => {
+  filter = b.dataset.f; document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === b)); render();
+});
+$("q").oninput = render;
+</script>
+</body>
+</html>
