@@ -18,14 +18,14 @@ This repo is an open benchmark and a small reference system that answers **item 
 
 The hazard items are vapes, AA batteries and LED bulbs. The last column has only about 20 special-handling items, so treat it as a rough figure.
 
-In the full corpus (300 rows, 25 cities), 17 of 20 items get different answers in different cities. Any answer that ignores location tops out at 78.0% accuracy, and 23.2% of special-handling items would go in the wrong bin. Rows for the 17 extra cities were drafted by an LLM and kept only if the quote appears verbatim on the official page. In a 50-row spot check, 41 were correct, 4 ambiguous and 5 wrong (those 5 were removed). Those rows are scored separately because their labels came from the same pages.
+In the full corpus (305 rows, 26 cities), 17 of 20 items get different answers in different cities. Any answer that ignores location tops out at 78.4% accuracy, and 22.8% of special-handling items would go in the wrong bin. Rows for the 17 extra cities were drafted by an LLM (Makassar, Indonesia, was added by hand) and kept only if the quote appears verbatim on the official page. In a 50-row spot check, 41 were correct, 4 ambiguous and 5 wrong (those 5 were removed). Those rows are scored separately because their labels came from the same pages.
 
 ## Guidance gaps
 
 This applies to the 15 cities whose main resident "what goes where" page was read for all 20 items (Vienna and Yogyakarta are excluded because their sources are a quiz sheet and an office guideline):
 
-- 7 of 15 resident guides never mention vapes (verified by text search of each page).
-- 9 of 15 give no rule for LED bulbs.
+- 8 of 16 resident guides never mention vapes (verified by text search of each page).
+- 10 of 16 give no rule for LED bulbs.
 
 Assistants fill those gaps with guesses. `gaps.py` gives each city a list of what to add.
 

@@ -205,3 +205,8 @@ yokohama,JP,drinking_glass,trash,燃えないごみ,コ ッ プ 類（ ガ ラ �
 yokohama,JP,toothpaste_tube,recycle,プラスチック資源,歯磨き粉のチューブ容器 中身を使い切って。 プ,https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/gomi-recycle/ongen/pamphlet/wakedashi.files/16P27-34.pdf
 yogyakarta,ID,eps_takeaway,trash,sampah residu,"sampah residu ( pampers, pembalut, styrofoam, plastic alumunium, dll)",https://umumprotokol.jogjakota.go.id/download/hit/13912/pedoman-teknis-pengelolaan-sampah-balaikota-yogyakarta--tahun-20-13912.pdf
 yogyakarta,ID,toothpaste_tube,trash,sampah residu,"sampah residu ( pampers, pembalut, styrofoam, plastic alumunium, dll)",https://umumprotokol.jogjakota.go.id/download/hit/13912/pedoman-teknis-pengelolaan-sampah-balaikota-yogyakarta--tahun-20-13912.pdf
+makassar,ID,aa_battery,special,Sampah B3 (Wadah Merah),baterai bekas,https://tamalanreakec.makassarkota.go.id/berita/yuk-mulai-pilah-sampah-dari-rumah-begini-aturannya-di-kota-makassar
+makassar,ID,pet_bottle,recycle,Sampah Anorganik (Wadah Kuning),botol air mineral bekas,https://tamalanreakec.makassarkota.go.id/berita/yuk-mulai-pilah-sampah-dari-rumah-begini-aturannya-di-kota-makassar
+makassar,ID,plastic_bag,recycle,Sampah Anorganik (Wadah Kuning),kantong plastik bersih,https://tamalanreakec.makassarkota.go.id/berita/yuk-mulai-pilah-sampah-dari-rumah-begini-aturannya-di-kota-makassar
+makassar,ID,eps_takeaway,trash,Sampah Residu (Wadah Abu-abu),styrofoam (gabus makanan),https://tamalanreakec.makassarkota.go.id/berita/yuk-mulai-pilah-sampah-dari-rumah-begini-aturannya-di-kota-makassar
+makassar,ID,paper_towel,trash,Sampah Residu (Wadah Abu-abu),tisu bekas yang kotor,https://tamalanreakec.makassarkota.go.id/berita/yuk-mulai-pilah-sampah-dari-rumah-begini-aturannya-di-kota-makassar
